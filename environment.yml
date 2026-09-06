@@ -1,0 +1,16 @@
+name: econ5129
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - scikit-learn
+  - statsmodels
+  - jupyterlab
+  - pip
+  - pip:
+      - jupyter-book<2
+      - ghp-import

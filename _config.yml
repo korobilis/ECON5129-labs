@@ -1,0 +1,45 @@
+title: ECON5129 Computer Labs
+author: Dimitris Korobilis, Adam Smith Business School
+copyright: "2026"
+only_build_toc_files: true
+
+execute:
+  execute_notebooks: "off"
+
+parse:
+  myst_enable_extensions:
+    - dollarmath
+    - amsmath
+    - colon_fence
+    - deflist
+
+repository:
+  url: https://github.com/korobilis/ECON5129-labs
+  branch: main
+
+launch_buttons:
+  colab_url: "https://colab.research.google.com"
+  notebook_interface: "classic"
+
+html:
+  use_repository_button: true
+  use_issues_button: false
+  use_edit_page_button: false
+  home_page_in_navbar: false
+
+exclude_patterns:
+  - master/**
+  - scripts/**
+  - build/**
+  - _build/**
+  - README.md
+  - PUBLISHING.md
+  - .ipynb_checkpoints/**
+
+sphinx:
+  config:
+    html_show_copyright: false
+    mathjax3_config:
+      tex:
+        macros:
+          bbeta: "\\boldsymbol{\\beta}"

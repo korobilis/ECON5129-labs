@@ -1,0 +1,19 @@
+format: jb-book
+root: intro
+
+parts:
+  - caption: Before you start
+    chapters:
+      - file: getting_started/setup
+
+  - caption: Labs
+    chapters:
+      - file: labs/lab01_regression
+
+  - caption: Solutions
+    chapters:
+      - file: solutions/lab01_regression_solutions
+
+  - caption: Reference
+    chapters:
+      - file: references
