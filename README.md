@@ -12,7 +12,7 @@ labs/              generated student notebooks, outputs cleared
 solutions/         generated solution notebooks
 data/              frozen datasets
 econ5129_utils.py  shared helper module, downloaded by each notebook at runtime
-scripts/           build tooling
+scripts/           build tooling and the one-time FOMC corpus build notebook
 intro.md           book landing page
 _config.yml        Jupyter Book configuration
 _toc.yml           book table of contents
@@ -23,6 +23,7 @@ _toc.yml           book table of contents
 ```bash
 conda activate econ5129
 python scripts/build_labs.py       # regenerate labs/ and solutions/ from master/
+python scripts/run_solutions.py    # execute the solutions, storing their output
 jupyter-book build .               # build the site into _build/html
 ghp-import -n -p -f _build/html    # publish to GitHub Pages
 ```

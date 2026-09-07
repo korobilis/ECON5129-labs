@@ -19,16 +19,18 @@ The labs are not assessed. They exist to make the lecture material concrete and 
 | 1 | Regression | Linear regression, from algebra to Bayes |
 | 2 | Classification | The Bayes classifier, discriminant analysis and logistic regression |
 | 3 | Shrinkage I | Ridge, LASSO and the elastic net |
-| 4 | Shrinkage II | Principal components, factor models and dense signals |
+| 4 | Shrinkage II | Principal components, factors and the sparse-dense debate |
 | 5 | Nonlinearity I | Kernels, splines and Gaussian processes |
-| 6 | Nonlinearity II | Trees, random forests and boosting |
-| 7 | Deep Learning I | Neural networks built from scratch |
-| 8 | Deep Learning II | Networks, recurrent models and autoencoders for macroeconomic data |
+| 6 | Nonlinearity II | Trees, forests and boosting |
+| 7 | Deep Learning I | Neural networks from scratch |
+| 8 | Deep Learning II | Networks for macroeconomics and finance |
 | 9 | Text as Data I | Representing text, sentiment and topic models |
-| 10 | Text as Data II | Embeddings, transformers and text-augmented forecasting |
+| 10 | Text as Data II | Attention, transfer learning and text for forecasting |
 
 ## Working conventions
 
 Notation follows the lecture slides throughout. Cross-sectional problems are indexed $i = 1, \dots, n$ with $p$ predictors collected in the design matrix $\mathbf{X}$; from the shrinkage labs onward, time series problems are indexed $t = 1, \dots, T$.
 
-Simulated data is used wherever the point is to compare an estimator against a known truth. Real data, principally the FRED-MD monthly macroeconomic panel, is used wherever the point is that we do not know the truth.
+Simulated data is used wherever the point is to compare an estimator against a known truth. Real data is used wherever the point is that we do not know it: the FRED-MD monthly macroeconomic panel from Lab 3 onwards, and the transcripts of Federal Open Market Committee meetings in Labs 9 and 10.
+
+One forecasting problem recurs from Lab 3 to Lab 10: predicting the monthly change in the US unemployment rate from 363 macroeconomic predictors. Every method in the course is applied to it, against the same autoregressive benchmark, so that the comparisons across lectures are real comparisons rather than a change of subject.

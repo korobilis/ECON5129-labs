@@ -9,10 +9,28 @@ parts:
   - caption: Labs
     chapters:
       - file: labs/lab01_regression
+      - file: labs/lab02_classification
+      - file: labs/lab03_shrinkage
+      - file: labs/lab04_factors
+      - file: labs/lab05_smoothers
+      - file: labs/lab06_trees
+      - file: labs/lab07_neural_networks
+      - file: labs/lab08_deep_learning_applications
+      - file: labs/lab09_text_as_data
+      - file: labs/lab10_attention_and_forecasting
 
   - caption: Solutions
     chapters:
       - file: solutions/lab01_regression_solutions
+      - file: solutions/lab02_classification_solutions
+      - file: solutions/lab03_shrinkage_solutions
+      - file: solutions/lab04_factors_solutions
+      - file: solutions/lab05_smoothers_solutions
+      - file: solutions/lab06_trees_solutions
+      - file: solutions/lab07_neural_networks_solutions
+      - file: solutions/lab08_deep_learning_applications_solutions
+      - file: solutions/lab09_text_as_data_solutions
+      - file: solutions/lab10_attention_and_forecasting_solutions
 
   - caption: Reference
     chapters:

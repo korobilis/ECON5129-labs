@@ -100,16 +100,24 @@ Wait a minute or two, then visit https://korobilis.github.io/ECON5129-labs. You 
 
 ## Part 2: The routine for each lab
 
-Four commands, from the repository folder with the `econ5129` environment active.
+Five commands, from the repository folder with the `econ5129` environment active.
 
 ```bash
 python scripts/build_labs.py       # 1. regenerate student and solution notebooks
-jupyter-book build .               # 2. build the site
-ghp-import -n -p -f _build/html    # 3. publish the site
-git add . && git commit -m "Lab 2" && git push    # 4. save the source
+python scripts/run_solutions.py    # 2. execute the solutions, storing their output
+jupyter-book build .               # 3. build the site
+ghp-import -n -p -f _build/html    # 4. publish the site
+git add . && git commit -m "Lab 2" && git push    # 5. save the source
 ```
 
-Step 4 is separate from step 3 on purpose. Step 3 publishes the *website*; step 4 saves the *source files* that produced it. Both matter, and forgetting the second is the usual way people lose work.
+Step 5 is separate from step 4 on purpose. Step 4 publishes the *website*; step 5 saves the *source files* that produced it. Both matter, and forgetting the second is the usual way people lose work.
+
+To work on a single lab rather than all ten, both scripts accept a prefix:
+
+```bash
+python scripts/build_labs.py lab03
+python scripts/run_solutions.py lab03
+```
 
 ### Where to make edits
 
@@ -140,12 +148,21 @@ while the solution notebook keeps everything, with the markers removed.
 
 ### Outputs, figures and tables
 
-The site does not execute notebooks when it builds. It displays whatever outputs are saved inside the file. So:
+The site does not execute notebooks when it builds. It displays whatever outputs are saved inside the file. That is what `run_solutions.py` is for: it executes each solution notebook in place, so the figures and tables end up stored in the file and appear on the site.
 
-- **Solution notebooks** should be run before publishing, so that the site shows the figures and tables. Open `solutions/lab01_regression_solutions.ipynb` in JupyterLab, choose `Run` &rarr; `Restart Kernel and Run All Cells`, save, then build.
-- **Student notebooks** are published deliberately without outputs. Students generate their own.
+It doubles as the test suite. Every cell of every solution notebook is run, and anything that breaks is reported by name:
 
-For Labs 7 to 10, which need PyTorch and `transformers`, run the solution notebook in Colab instead, then download it with `File` &rarr; `Download` &rarr; `Download .ipynb` and replace the file in `solutions/` before building.
+```
+running solutions/lab03_shrinkage_solutions.ipynb ... ok (94s)
+running solutions/lab04_factors_solutions.ipynb ... FAILED (12s)
+  ValueError: ...
+```
+
+Expect the full set to take roughly fifteen to twenty-five minutes. Labs 3, 6 and 8 are the slow ones because of cross-validation and ensembles.
+
+**Student notebooks are published deliberately without outputs.** Students generate their own. If you want to check that a student notebook at least opens and runs to its first exercise, `python scripts/run_solutions.py --labs` will execute those too, though it will report failures wherever an exercise stub is waiting to be filled in, which is expected.
+
+**Part 3 of Lab 10** is switched off by default through the `RUN_TRANSFORMERS` flag in its setup cell, so no notebook in the repository requires PyTorch or `transformers`. If you want the FinBERT output to appear on the site, run that notebook in Colab with the flag set to `True`, download it with `File` &rarr; `Download` &rarr; `Download .ipynb`, and replace the file in `solutions/` before building.
 
 ### Withholding solutions until after the session
 
@@ -155,6 +172,22 @@ The repository is public, so anything you commit is visible. To release solution
 2. After the session, uncomment the line, commit the solution notebook, and run the routine again.
 
 A blunter alternative, if you prefer not to think about it each week, is to publish solutions immediately and simply tell students not to look until they have tried. Many courses do this and it works about as well.
+
+---
+
+## Part 3: Before Labs 9 and 10
+
+Those two labs read a corpus of FOMC meeting transcripts that is not in the repository yet, because it has to be built once from the ConvoKit distribution. Until you do this, both labs will fail at their first data cell.
+
+1. Open `scripts/build_fomc_data.ipynb` in Google Colab.
+2. Uncomment the `pip install convokit` line in the first code cell and run the notebook top to bottom. It takes a few minutes, most of it downloading.
+3. Download the two files it produces, `fomc_meetings.csv.gz` and `fomc_utterances.csv.gz`, from the Colab file browser.
+4. Put both in the `data` folder of the repository, commit and push.
+5. Run `python scripts/run_solutions.py lab09` to confirm the labs now work end to end.
+
+The notebook prints a validation summary at the end. Check that the meeting count is in the region of 260 and that the chairs listed are the ones you expect before committing.
+
+Nothing else in the course depends on this step, so it can wait until week eight if convenient.
 
 ---
 
@@ -171,3 +204,7 @@ A blunter alternative, if you prefer not to think about it each week, is to publ
 **Colab opens but the first cell fails.** The repository must be public and the branch in `scripts/build_labs.py` must match your default branch name, which is `main`.
 
 **A page renders LaTeX as raw text.** Use `$ ... $` for inline maths and `$$ ... $$` on their own lines for display maths. The `\(` and `\[` delimiters are not enabled.
+
+**`run_solutions.py` reports that a notebook failed.** Open the notebook named in the message and run it by hand to see the full traceback. The most common causes are an edit to `econ5129_utils.py` that changed a function signature, and a `scikit-learn` upgrade that deprecated an argument.
+
+**Labs 9 or 10 fail with a file-not-found error on `fomc_meetings.csv.gz`.** The corpus has not been built. See Part 3.
