@@ -66,7 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Lab 1: Linear Regression, from Algebra to Bayes" href="../solutions/lab01_regression_solutions.html" />
+    <link rel="next" title="Lab 2: Classification" href="lab02_classification.html" />
     <link rel="prev" title="Getting set up" href="../getting_started/setup.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -214,10 +214,28 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 1: Linear Regression, from Algebra to Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab02_classification.html">Lab 2: Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab03_shrinkage.html">Lab 3: Ridge, LASSO and the Elastic Net</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab04_factors.html">Lab 4: Principal Components, Factors and the Sparse-Dense Debate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab05_smoothers.html">Lab 5: Kernels, Splines and Gaussian Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab06_trees.html">Lab 6: Trees, Forests and Boosting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab07_neural_networks.html">Lab 7: Neural Networks from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab08_deep_learning_applications.html">Lab 8: Networks for Macroeconomics and Finance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab09_text_as_data.html">Lab 9: Text as Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab10_attention_and_forecasting.html">Lab 10: Attention, Transfer Learning and Text for Forecasting</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../solutions/lab01_regression_solutions.html">Lab 1: Linear Regression, from Algebra to Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/lab02_classification_solutions.html">Lab 2: Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/lab03_shrinkage_solutions.html">Lab 3: Ridge, LASSO and the Elastic Net</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/lab04_factors_solutions.html">Lab 4: Principal Components, Factors and the Sparse-Dense Debate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/lab05_smoothers_solutions.html">Lab 5: Kernels, Splines and Gaussian Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/lab06_trees_solutions.html">Lab 6: Trees, Forests and Boosting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/lab07_neural_networks_solutions.html">Lab 7: Neural Networks from Scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/lab08_deep_learning_applications_solutions.html">Lab 8: Networks for Macroeconomics and Finance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/lab09_text_as_data_solutions.html">Lab 9: Text as Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/lab10_attention_and_forecasting_solutions.html">Lab 10: Attention, Transfer Learning and Text for Forecasting</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -419,8 +437,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-the-geometry-of-least-squares">Part 2. The geometry of least squares</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-is-a-squared-cosine"><span class="math notranslate nohighlight">\(R^2\)</span> is a squared cosine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-fit-versus-prediction">Part 2. Fit versus prediction</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 </ul>
 </li>
@@ -466,7 +483,7 @@
 <p>This lab accompanies Lecture 1. By the end of the session you should be able to:</p>
 <ol class="arabic simple">
 <li><p>Compute the least squares estimator three different ways and explain why the textbook formula is the wrong way to program it.</p></li>
-<li><p>Interpret least squares as an orthogonal projection, and read the hat matrix, leverage and <span class="math notranslate nohighlight">\(R^2\)</span> off that geometry.</p></li>
+<li><p>Separate in-sample fit from out-of-sample prediction, and demonstrate that the first is no evidence of the second.</p></li>
 <li><p>Verify the sampling properties of <span class="math notranslate nohighlight">\(\widehat{\boldsymbol{\beta}}\)</span> by simulation, and see through the singular value decomposition why collinearity inflates variance.</p></li>
 <li><p>Fit nonlinear functions with a linear model through basis expansions, and watch overfitting appear.</p></li>
 <li><p>Estimate the same model by maximum likelihood, and change the likelihood to change the estimator.</p></li>
@@ -487,7 +504,7 @@
 <td><p>Part 1. Least squares three ways</p></td>
 </tr>
 <tr class="row-even"><td><p>0:30 - 0:50</p></td>
-<td><p>Part 2. The geometry of least squares</p></td>
+<td><p>Part 2. Fit versus prediction</p></td>
 </tr>
 <tr class="row-odd"><td><p>0:50 - 1:10</p></td>
 <td><p>Part 3. Sampling properties</p></td>
@@ -646,60 +663,74 @@
 </div>
 </section>
 </section>
-<section id="part-2-the-geometry-of-least-squares">
-<h2>Part 2. The geometry of least squares<a class="headerlink" href="#part-2-the-geometry-of-least-squares" title="Link to this heading">#</a></h2>
-<p>Least squares projects <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> orthogonally onto the column space of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. The projection is carried out by the hat matrix</p>
-<div class="math notranslate nohighlight">
-\[ \mathbf{H} = \mathbf{X}(\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}', \qquad \widehat{\mathbf{y}} = \mathbf{H}\mathbf{y}, \qquad \widehat{\boldsymbol{\varepsilon}} = (\mathbf{I} - \mathbf{H})\mathbf{y}. \]</div>
-<p>Everything in the lecture’s geometric section is a property of <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>, and every one of them can be checked numerically.</p>
+<section id="part-2-fit-versus-prediction">
+<h2>Part 2. Fit versus prediction<a class="headerlink" href="#part-2-fit-versus-prediction" title="Link to this heading">#</a></h2>
+<p>Econometrics traditionally asks whether a coefficient is right. Machine learning asks whether the next prediction is right. The two questions can point in opposite directions, and the cleanest way to see this is to add predictors that are pure noise.</p>
+<p>By construction the following columns have nothing to do with <span class="math notranslate nohighlight">\(y\)</span>. Watch what happens to <span class="math notranslate nohighlight">\(R^2\)</span> anyway.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="n">y_hat</span> <span class="o">=</span> <span class="n">H</span> <span class="o">@</span> <span class="n">y</span>
-<span class="n">resid</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">y_hat</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_train_split</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">X_full</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train_split</span><span class="p">),</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train_split</span><span class="p">,</span> <span class="n">p</span><span class="p">))])</span>
+<span class="n">y_full</span> <span class="o">=</span> <span class="n">X_full</span> <span class="o">@</span> <span class="n">beta_true</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train_split</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"H is symmetric      : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="w"> </span><span class="n">H</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"H is idempotent     : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">H</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">H</span><span class="p">,</span><span class="w"> </span><span class="n">H</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"trace(H) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">H</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">, and p = </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"residuals orthogonal to X: max |X'e| = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">resid</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"residuals orthogonal to fitted values: </span><span class="si">{</span><span class="n">y_hat</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">resid</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">train</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_train_split</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">n_train_split</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n_train_split</span><span class="p">)</span>
+
+<span class="n">noise_counts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>
+<span class="n">r2_in</span><span class="p">,</span> <span class="n">mse_out</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">noise_counts</span><span class="p">:</span>
+    <span class="n">noise_cols</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train_split</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span> <span class="k">if</span> <span class="n">k</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train_split</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">X_full</span><span class="p">,</span> <span class="n">noise_cols</span><span class="p">])</span>
+
+    <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">y_full</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">resid_in</span> <span class="o">=</span> <span class="n">y_full</span><span class="p">[</span><span class="n">train</span><span class="p">]</span> <span class="o">-</span> <span class="n">Z</span><span class="p">[</span><span class="n">train</span><span class="p">]</span> <span class="o">@</span> <span class="n">b</span>
+
+    <span class="n">r2_in</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">resid_in</span> <span class="o">@</span> <span class="n">resid_in</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_full</span><span class="p">[</span><span class="n">train</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_full</span><span class="p">[</span><span class="n">train</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">mse_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e5</span><span class="o">.</span><span class="n">mse</span><span class="p">(</span><span class="n">y_full</span><span class="p">[</span><span class="n">test</span><span class="p">],</span> <span class="n">Z</span><span class="p">[</span><span class="n">test</span><span class="p">]</span> <span class="o">@</span> <span class="n">b</span><span class="p">))</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"noise regressors"</span><span class="p">:</span> <span class="n">noise_counts</span><span class="p">,</span>
+              <span class="s2">"in-sample $R^2$"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r2_in</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+              <span class="s2">"out-of-sample MSE"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">mse_out</span><span class="p">,</span> <span class="mi">4</span><span class="p">)})</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The trace of an idempotent matrix equals its rank, so <span class="math notranslate nohighlight">\(\operatorname{tr}(\mathbf{H}) = p\)</span> counts the dimensions of the space we project onto. This is the sense in which a model has “<span class="math notranslate nohighlight">\(p\)</span> degrees of freedom”, and in Lecture 5 we will meet smoothers whose effective degrees of freedom are not integers.</p>
-<section id="r-2-is-a-squared-cosine">
-<h3><span class="math notranslate nohighlight">\(R^2\)</span> is a squared cosine<a class="headerlink" href="#r-2-is-a-squared-cosine" title="Link to this heading">#</a></h3>
-<p>Write <span class="math notranslate nohighlight">\(\tilde{\mathbf{y}}\)</span> for the demeaned response. Then <span class="math notranslate nohighlight">\(R^2 = \|\widehat{\tilde{\mathbf{y}}}\|^2 / \|\tilde{\mathbf{y}}\|^2\)</span>, which is exactly <span class="math notranslate nohighlight">\(\cos^2 \theta\)</span> where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle between the demeaned response and its projection.</p>
+<p>In-sample <span class="math notranslate nohighlight">\(R^2\)</span> rises monotonically towards one, while out-of-sample error deteriorates. Adding a regressor can never worsen the fit, because least squares can always set its coefficient to zero. That is exactly why in-sample fit is not evidence of anything.</p>
+<p>With <span class="math notranslate nohighlight">\(p\)</span> close to <span class="math notranslate nohighlight">\(n\)</span> the model interpolates the training data perfectly and predicts the test data disastrously. This is the whole motivation for Lecture 3.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_tilde</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">y_hat_tilde</span> <span class="o">=</span> <span class="n">y_hat</span> <span class="o">-</span> <span class="n">y_hat</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">noise_counts</span><span class="p">,</span> <span class="n">r2_in</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"in-sample $R^2$"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"number of irrelevant regressors added"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"in-sample $R^2$"</span><span class="p">)</span>
 
-<span class="n">r2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_hat_tilde</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_tilde</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">cos_theta</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_tilde</span> <span class="o">@</span> <span class="n">y_hat_tilde</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y_tilde</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y_hat_tilde</span><span class="p">))</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">noise_counts</span><span class="p">,</span> <span class="n">mse_out</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"s"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">e5</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"out-of-sample MSE"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"out-of-sample MSE"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"R-squared     : </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"cos^2(theta)  : </span><span class="si">{</span><span class="n">cos_theta</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">2</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"angle theta   : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">cos_theta</span><span class="p">))</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> degrees"</span><span class="p">)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()</span> <span class="o">+</span> <span class="n">ax2</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"upper left"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Fit always improves; prediction does not"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
 <section id="exercise-2">
 <h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
-<p>The diagonal element <span class="math notranslate nohighlight">\(h_{ii}\)</span> of the hat matrix is the <strong>leverage</strong> of observation <span class="math notranslate nohighlight">\(i\)</span>: it measures how strongly that single observation pulls its own fitted value.</p>
+<p>The comparison above uses a single split, so part of what you see is luck. Make it robust.</p>
 <ol class="arabic simple">
-<li><p>Extract the leverages and confirm that they sum to <span class="math notranslate nohighlight">\(p\)</span> and that each lies in <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p></li>
-<li><p>Plot the leverages against the observation index and mark the average value <span class="math notranslate nohighlight">\(p/n\)</span>.</p></li>
-<li><p>Now append a single outlying observation whose predictors are far from the rest of the sample, refit, and report its leverage.</p></li>
+<li><p>Write a function <code class="docutils literal notranslate"><span class="pre">split_experiment(k,</span> <span class="pre">n_train,</span> <span class="pre">n_rep)</span></code> that repeats the experiment <code class="docutils literal notranslate"><span class="pre">n_rep</span></code> times with <span class="math notranslate nohighlight">\(k\)</span> noise regressors, each time drawing fresh data, and returns the average out-of-sample MSE.</p></li>
+<li><p>Run it for <span class="math notranslate nohighlight">\(k \in \{0, 10, 20, \dots, 80\}\)</span> with <code class="docutils literal notranslate"><span class="pre">n_train</span> <span class="pre">=</span> <span class="pre">100</span></code> and <code class="docutils literal notranslate"><span class="pre">n_rep</span> <span class="pre">=</span> <span class="pre">200</span></code>.</p></li>
+<li><p>Plot the average against <span class="math notranslate nohighlight">\(k\)</span>. At what ratio of <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(n\)</span> does the deterioration become severe?</p></li>
 </ol>
-<p>What does this tell you about the influence a single observation can have on a least squares fit?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
-<span class="c1"># your code here</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">split_experiment</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n_train</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_rep</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Average out-of-sample MSE with k irrelevant regressors added."""</span>
+    <span class="c1"># your code here</span>
 </pre></div>
 </div>
 </div>
@@ -1174,7 +1205,7 @@
 <h2>Take-home challenges<a class="headerlink" href="#take-home-challenges" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Frisch-Waugh-Lovell.</strong> Regress <code class="docutils literal notranslate"><span class="pre">INDPRO</span></code> growth on <code class="docutils literal notranslate"><span class="pre">UNRATE</span></code> alone after partialling out the remaining predictors from both, and verify that you recover exactly the multiple regression coefficient on <code class="docutils literal notranslate"><span class="pre">UNRATE</span></code>. Explain what this says about what a regression coefficient measures.</p></li>
-<li><p><strong>Degrees of freedom.</strong> For the radial basis fit, compute <span class="math notranslate nohighlight">\(\operatorname{tr}(\mathbf{H})\)</span> for each <span class="math notranslate nohighlight">\(M\)</span> and plot test error against effective degrees of freedom rather than against <span class="math notranslate nohighlight">\(M\)</span>. Where does the minimum sit relative to <span class="math notranslate nohighlight">\(n\)</span>?</p></li>
+<li><p><strong>Degrees of freedom.</strong> For the radial basis fit, compute the number of basis functions at which training error reaches zero, and confirm that this happens when the number of columns equals <span class="math notranslate nohighlight">\(n\)</span>. Relate it to the interpolation threshold you found in Exercise 2.</p></li>
 <li><p><strong>Ridge as data augmentation.</strong> Show numerically that ridge regression with penalty <span class="math notranslate nohighlight">\(\lambda\)</span> is ordinary least squares applied to the augmented data <span class="math notranslate nohighlight">\(\tilde{\mathbf{X}} = [\mathbf{X}; \sqrt{\lambda}\mathbf{I}]\)</span> and <span class="math notranslate nohighlight">\(\tilde{\mathbf{y}} = [\mathbf{y}; \mathbf{0}]\)</span>. Relate the augmented rows to the prior of Part 6.</p></li>
 <li><p><strong>Prior sensitivity.</strong> Repeat Part 6 with a prior centred away from zero, <span class="math notranslate nohighlight">\(\boldsymbol{\beta} \sim N(\mathbf{b}_0, \tau^2\mathbf{I})\)</span> with <span class="math notranslate nohighlight">\(\mathbf{b}_0 = (0, 1, 1, 1)'\)</span>. Derive the modified posterior mean, implement it, and show how quickly the data overwhelm a wrong prior as <span class="math notranslate nohighlight">\(n\)</span> grows.</p></li>
 </ol>
@@ -1223,11 +1254,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="../solutions/lab01_regression_solutions.html"
+       href="lab02_classification.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 1: Linear Regression, from Algebra to Bayes</p>
+        <p class="prev-next-title">Lab 2: Classification</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1255,8 +1286,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-the-geometry-of-least-squares">Part 2. The geometry of least squares</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-is-a-squared-cosine"><span class="math notranslate nohighlight">\(R^2\)</span> is a squared cosine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-fit-versus-prediction">Part 2. Fit versus prediction</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 </ul>
 </li>
