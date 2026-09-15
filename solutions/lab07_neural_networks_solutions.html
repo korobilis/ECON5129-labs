@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -503,7 +503,7 @@
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
 
 <span class="n">REPO_RAW</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/korobilis/ECON5129-labs/main"</span>
@@ -533,7 +533,7 @@
 <p>Start with the activation functions themselves.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
 <span class="n">activations</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"sigmoid"</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">)),</span>
     <span class="s2">"tanh"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z</span><span class="p">),</span>
@@ -560,12 +560,15 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f0a9e3f50d5673993c2877100237d25b05eef05291217ff568230683b71da242.png" src="../_images/f0a9e3f50d5673993c2877100237d25b05eef05291217ff568230683b71da242.png" />
+</div>
 </div>
 <p>The derivative panel explains the historical shift to ReLU. Sigmoid and tanh derivatives vanish away from zero, so in a deep network the chain rule multiplies many small numbers together and the gradient reaching the early layers disappears. The ReLU derivative is either zero or one.</p>
 <p>To see that the hidden units really are basis functions, fit a network with fixed random inner weights, so that only the output layer is estimated. That is exactly a linear regression on random features.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">relu</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">relu</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
 
 
@@ -600,6 +603,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/2d22be2ada19e471903c1d11a8106ef591752026c37922c4a07e6985ecc6bec8.png" src="../_images/2d22be2ada19e471903c1d11a8106ef591752026c37922c4a07e6985ecc6bec8.png" />
+</div>
 </div>
 </section>
 <section id="part-2-backpropagation-written-out">
@@ -610,7 +616,7 @@
 <p>Backpropagation is the chain rule applied in the order that reuses computations. The implementation below handles any number of layers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NeuralNetwork</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NeuralNetwork</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Fully connected feedforward network with ReLU hidden units, trained by Adam."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer_sizes</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
@@ -728,7 +734,7 @@
 <p>Analytic gradients are easy to get wrong and the errors are silent: the network trains, just badly. Always compare against a numerical derivative before trusting an implementation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">net_check</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">net_check</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">X_check</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="mi">20</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
 <span class="n">y_check</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
 
@@ -752,6 +758,13 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>analytic gradient  : 4.5182025036
+numerical gradient : 4.5182025037
+relative difference: 2.50e-11
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="exercise-1">
@@ -764,7 +777,7 @@
 </ol>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gradient_check</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gradient_check</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Largest relative difference between analytic and numerical gradients."""</span>
     <span class="n">grads_W</span><span class="p">,</span> <span class="n">grads_b</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="n">worst</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -793,11 +806,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>largest relative gradient error: 7.72e-10
+</pre></div>
+</div>
+</div>
 </div>
 <p>Now train the network properly and compare it with the random feature fit from Part 1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_1d</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_1d</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
 <span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">history</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_1d</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 
@@ -818,6 +836,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/1035824715476ca8cf9606aefd67ee410e16261341500a68d825be85b294c452.png" src="../_images/1035824715476ca8cf9606aefd67ee410e16261341500a68d825be85b294c452.png" />
+</div>
 </div>
 </section>
 </section>
@@ -826,7 +847,7 @@
 <p>Adam is the default for a reason, but it is worth seeing what it improves on. Plain stochastic gradient descent takes a step proportional to the gradient. Momentum accumulates a velocity, damping oscillations across narrow valleys. Adam additionally scales each coordinate by a running estimate of its gradient magnitude.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">train_simple</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">optimiser</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">train_simple</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">optimiser</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Train the same architecture with a chosen first-order optimiser."""</span>
     <span class="n">net</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">velocity_W</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">W</span><span class="p">)</span> <span class="k">for</span> <span class="n">W</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">W</span><span class="p">]</span>
@@ -867,6 +888,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/aa4aed1646c7a2d828087182ef68cba7674034addfa80e9e5519aa2bebed204a.png" src="../_images/aa4aed1646c7a2d828087182ef68cba7674034addfa80e9e5519aa2bebed204a.png" />
+</div>
 </div>
 </section>
 <section id="part-4-regularisation">
@@ -874,7 +898,7 @@
 <p>A network with thousands of parameters fitted to 200 observations will interpolate the noise unless something prevents it. Three devices do the preventing, and they are not interchangeable.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">order</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">order</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">train_idx</span><span class="p">,</span> <span class="n">val_idx</span> <span class="o">=</span> <span class="n">order</span><span class="p">[:</span><span class="mi">140</span><span class="p">],</span> <span class="n">order</span><span class="p">[</span><span class="mi">140</span><span class="p">:]</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">X_1d</span><span class="p">[</span><span class="n">train_idx</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">train_idx</span><span class="p">]</span>
 <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">X_1d</span><span class="p">[</span><span class="n">val_idx</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">val_idx</span><span class="p">]</span>
@@ -915,6 +939,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/83db3e74d2c38c967f1b8daffce3d560fddcd9bee19a6a70b2f5c2034b6de4cc.png" src="../_images/83db3e74d2c38c967f1b8daffce3d560fddcd9bee19a6a70b2f5c2034b6de4cc.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               final training loss  final validation loss
+configuration                                            
+unregularised               0.0936                 0.1475
+weight decay                0.1590                 0.2108
+dropout 0.2                 0.1291                 0.1480
+</pre></div>
+</div>
+</div>
 </div>
 <section id="exercise-2">
 <h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
@@ -927,7 +961,7 @@
 <p>Explain, in terms of the path the optimiser takes through parameter space, why stopping early acts like a penalty on the size of the weights.</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">net_early</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">net_early</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">hist_early</span> <span class="o">=</span> <span class="n">net_early</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
                            <span class="n">X_val</span><span class="o">=</span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="o">=</span><span class="n">y_val</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
 
@@ -946,6 +980,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>early stopping halted at epoch 144
+validation loss, early stopped : 0.1553
+validation loss, full training : 0.1475
+
+squared weight norm, early stopped : 416.14
+squared weight norm, full training : 754.30
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -955,7 +999,7 @@
 <p>The cleanest demonstration uses random features, which are a network with fixed inner weights, so the whole experiment is a sequence of linear regressions. When the number of features exceeds the number of observations, we take the minimum norm solution, which is what gradient descent from zero converges to.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">random_feature_experiment</span><span class="p">(</span><span class="n">n_train</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">n_test</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">widths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">random_feature_experiment</span><span class="p">(</span><span class="n">n_train</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">n_test</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">widths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Test error of minimum-norm random feature regression across model sizes."""</span>
     <span class="n">gen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">widths</span> <span class="o">=</span> <span class="n">widths</span> <span class="ow">or</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">800</span><span class="p">]</span>
@@ -993,6 +1037,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/c1c40b3497a24f32ec9f5fbafcfa6a7886784c383771be98f7b79f0bfa1b66b4.png" src="../_images/c1c40b3497a24f32ec9f5fbafcfa6a7886784c383771be98f7b79f0bfa1b66b4.png" />
+</div>
 </div>
 <p>Error falls, then rises to a spike exactly where the number of features equals the number of observations, then falls again and keeps falling. At the threshold there is exactly one interpolating solution and it is a terrible one. Beyond it there are infinitely many, and the minimum norm choice among them is well behaved.</p>
 <p>Nothing here contradicts Lecture 3. The classical analysis holds on the left of the spike. What it does not anticipate is that the implicit regularisation of the minimum norm solution takes over on the right.</p>
@@ -1006,7 +1053,7 @@
 </ol>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ridge_feature_experiment</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">n_train</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">n_test</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ridge_feature_experiment</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">n_train</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">n_test</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Random feature regression with an explicit ridge penalty."""</span>
     <span class="n">gen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">widths</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">800</span><span class="p">]</span>
@@ -1043,6 +1090,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/0449d104b57b86c08c2b956e506a58f9d1e9ef1ef9bb8a7287bf395200c79e30.png" src="../_images/0449d104b57b86c08c2b956e506a58f9d1e9ef1ef9bb8a7287bf395200c79e30.png" />
+</div>
 </div>
 </section>
 <section id="exercise-4">
@@ -1055,7 +1105,7 @@
 </ol>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neural_network</span><span class="w"> </span><span class="kn">import</span> <span class="n">MLPRegressor</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neural_network</span><span class="w"> </span><span class="kn">import</span> <span class="n">MLPRegressor</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
 <span class="n">x_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
@@ -1088,6 +1138,15 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                test MSE  seconds
+implementation                   
+ours              0.1154   0.7987
+scikit-learn      0.1310   0.1946
+</pre></div>
+</div>
+<img alt="../_images/3b4a75535405665be492c3d71d6fd2cb5aa2bc2181eecedc4b4629f173ae5684.png" src="../_images/3b4a75535405665be492c3d71d6fd2cb5aa2bc2181eecedc4b4629f173ae5684.png" />
 </div>
 </div>
 </section>

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -505,7 +505,7 @@
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
 
 <span class="n">REPO_RAW</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/korobilis/ECON5129-labs/main"</span>
@@ -532,7 +532,7 @@
 <p>The sample is small by the standards of the deep learning literature. Roughly 500 training observations and 363 predictors is a setting where a large network will memorise the training data unless held back firmly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fredmd</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fredmd</span><span class="p">()</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">build_forecast_dataset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">"UNRATE"</span><span class="p">,</span> <span class="n">horizon</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_lags</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dates</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">"X"</span><span class="p">],</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">"y"</span><span class="p">],</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">"dates"</span><span class="p">]</span>
 
@@ -550,11 +550,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>training 501 months to 2001-12, evaluation 216 months from 2002-01
+</pre></div>
+</div>
+</div>
 </div>
 <p>Scaling the target as well as the predictors matters here. Gradient descent with a fixed learning rate behaves very differently on a target with standard deviation 0.17 than on one with standard deviation 17.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_tr_scaled</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_tr</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_sd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_tr_scaled</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_tr</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_sd</span>
 
 <span class="n">validation_start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.85</span> <span class="o">*</span> <span class="n">split</span><span class="p">)</span>
 <span class="n">net</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">NeuralNetwork</span><span class="p">([</span><span class="n">Z_tr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
@@ -581,6 +586,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/9660ee9207341b8967fe6e5b307a4b3f63b377a6dee58e49c2f015a3a3fcc32c.png" src="../_images/9660ee9207341b8967fe6e5b307a4b3f63b377a6dee58e49c2f015a3a3fcc32c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>out-of-sample R-squared against the AR benchmark: -0.2137
+</pre></div>
+</div>
+</div>
 </div>
 <p>The number is negative: this network is beaten by an autoregression on three lags of the target. Before reaching for a bigger architecture, note the arithmetic of the problem. Roughly 500 training observations, 363 predictors, and a target whose month-to-month variation is mostly noise. There is not much information here to estimate thousands of weights from.</p>
 <p>Resist the urge to tune until the number turns positive. That procedure, repeated across a literature, produces published results that do not replicate. Instead, ask first how much of that number is signal and how much is the random seed.</p>
@@ -590,7 +601,7 @@
 <p>The number above also came from one random initialisation. Change the seed and the optimiser lands somewhere else on a non-convex surface. Reporting a single run is the most common way to overstate a result in this literature.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">seed_predictions</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seed_predictions</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
     <span class="n">net_s</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">NeuralNetwork</span><span class="p">([</span><span class="n">Z_tr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
                              <span class="n">weight_decay</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
@@ -620,6 +631,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/fa27aaf73e317865558a1883fc92fef74b9cf811f791da783a0549c2555cb461.png" src="../_images/fa27aaf73e317865558a1883fc92fef74b9cf811f791da783a0549c2555cb461.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>worst seed : -0.4113
+best seed  : -0.0938
+ensemble   : 0.1379
+</pre></div>
+</div>
+</div>
 </div>
 <p>The spread across seeds is often as large as the difference between competing methods in published tables. A study that reports one run, or that quietly reports the best of several, is reporting the seed rather than the method.</p>
 <p>Averaging the predictions across seeds costs nothing beyond computing time, and here it does something dramatic: every individual network loses to the autoregressive benchmark, and their average beats it. Nothing about the architecture changed. The individual networks were not biased, they were noisy, and averaging removes noise for the same reason bagging works in Lab 6.</p>
@@ -635,7 +654,7 @@
 <p>Would you report the network result in a paper?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LassoCV</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LassoCV</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestRegressor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeSeriesSplit</span>
 
@@ -659,6 +678,18 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                           out-of-sample $R^2$
+model                                         
+LASSO                                   0.1856
+random forest                           0.1914
+network, single seed                   -0.2137
+network, 12-seed ensemble               0.1379
+
+Diebold-Mariano, ensemble against LASSO: statistic 0.869, p-value 0.386
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -671,7 +702,7 @@
 <p>The process below is designed so that memory matters: the response depends on the accumulated level of a shock that decays slowly, and the sign of the effect depends on a regime that switches.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_memory_process</span><span class="p">(</span><span class="n">n_series</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_memory_process</span><span class="p">(</span><span class="n">n_series</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Sequences whose target depends on a slowly decaying accumulation."""</span>
     <span class="n">gen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_series</span><span class="p">,</span> <span class="n">length</span><span class="p">))</span>
@@ -756,7 +787,7 @@
 <p>The comparison is against a feedforward network given the last five observations of each sequence, which is the standard way an econometrician would set the problem up.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">window</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">window</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">mlp_seq</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">NeuralNetwork</span><span class="p">([</span><span class="n">window</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">mlp_seq</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_seq</span><span class="p">[:,</span> <span class="o">-</span><span class="n">window</span><span class="p">:],</span> <span class="n">y_seq</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 
@@ -782,6 +813,17 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                          test MSE
+model                             
+recurrent network           0.1024
+feedforward, last 5 lags    0.6266
+feedforward, all 30 lags    0.1582
+predict the mean            0.6998
+</pre></div>
+</div>
+<img alt="../_images/f5187d5d87d708c6c70522c4a6484b93759315c2ec8a18a033a50471da87c6ce.png" src="../_images/f5187d5d87d708c6c70522c4a6484b93759315c2ec8a18a033a50471da87c6ce.png" />
+</div>
 </div>
 <section id="exercise-2">
 <h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
@@ -794,7 +836,7 @@
 <p>State the condition under which the recurrent architecture earns its complexity.</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_with_decay</span><span class="p">(</span><span class="n">decay</span><span class="p">,</span> <span class="n">n_series</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_with_decay</span><span class="p">(</span><span class="n">decay</span><span class="p">,</span> <span class="n">n_series</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Sequence process with a tunable persistence parameter."""</span>
     <span class="n">gen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_series</span><span class="p">,</span> <span class="n">length</span><span class="p">))</span>
@@ -825,6 +867,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       recurrent  feedforward, 5 lags
+decay                                
+0.9       0.1024               0.6266
+0.3       0.0144               0.0258
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -836,7 +886,7 @@
 <p>minimising reconstruction error. If <span class="math notranslate nohighlight">\(g\)</span> and <span class="math notranslate nohighlight">\(h\)</span> are linear this recovers the principal component subspace exactly, which is the cleanest statement of the connection to Lecture 4. Making them nonlinear gives a factor model in which the loadings can bend.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transformed</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">fredmd_transform</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"1960-01"</span><span class="p">:</span><span class="s2">"2019-12"</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transformed</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">fredmd_transform</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"1960-01"</span><span class="p">:</span><span class="s2">"2019-12"</span><span class="p">]</span>
 <span class="n">panel</span> <span class="o">=</span> <span class="n">transformed</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">transformed</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)]</span>
 <span class="n">P</span> <span class="o">=</span> <span class="p">((</span><span class="n">panel</span> <span class="o">-</span> <span class="n">panel</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">panel</span><span class="o">.</span><span class="n">std</span><span class="p">())</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 
@@ -858,6 +908,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>out-of-sample reconstruction error, 8 principal components : 0.6622
+out-of-sample reconstruction error, autoencoder bottleneck 8: 1.3322
+</pre></div>
+</div>
+</div>
 </div>
 <section id="exercise-3">
 <h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Link to this heading">#</a></h3>
@@ -869,7 +925,7 @@
 </ol>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">bottleneck_layer</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">bottleneck_layer</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Run the input through the first layers of the autoencoder."""</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">X</span>
     <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bottleneck_layer</span><span class="p">):</span>
@@ -901,6 +957,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                      out-of-sample $R^2$
+predictors                               
+principal components               0.0494
+autoencoder factors                0.1551
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -910,7 +974,7 @@
 <p>The noise is deliberately large, as it is in real return data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">characteristics</span><span class="p">,</span> <span class="n">returns</span><span class="p">,</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">simulate_asset_panel</span><span class="p">(</span><span class="n">n_stocks</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">n_periods</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">characteristics</span><span class="p">,</span> <span class="n">returns</span><span class="p">,</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">simulate_asset_panel</span><span class="p">(</span><span class="n">n_stocks</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">n_periods</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">n_periods</span><span class="p">,</span> <span class="n">n_stocks</span><span class="p">,</span> <span class="n">n_chars</span> <span class="o">=</span> <span class="n">characteristics</span><span class="o">.</span><span class="n">shape</span>
 
 <span class="n">split_t</span> <span class="o">=</span> <span class="mi">168</span>
@@ -937,11 +1001,19 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                out-of-sample $R^2$
+model                              
+linear                       0.0072
+neural network               0.1401
+</pre></div>
+</div>
+</div>
 </div>
 <p>An out-of-sample <span class="math notranslate nohighlight">\(R^2\)</span> of a percent or two is what the literature reports for monthly returns, and it is not a disappointment. The economically meaningful question is whether the predictions sort stocks into portfolios that differ in realised return.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">long_short_returns</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">periods</span><span class="p">,</span> <span class="n">n_groups</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">long_short_returns</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">periods</span><span class="p">,</span> <span class="n">n_groups</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Return the top-minus-bottom quintile portfolio return in each period."""</span>
     <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">periods</span><span class="p">):</span>
@@ -976,6 +1048,15 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                mean return  monthly Sharpe
+strategy                                   
+linear               0.5652          1.1513
+neural network       2.0426          4.9087
+</pre></div>
+</div>
+<img alt="../_images/a768ef5e75d7a8367d8461ce26378cfe13b9a8dfc9e94e6ca58efb69b2924b82.png" src="../_images/a768ef5e75d7a8367d8461ce26378cfe13b9a8dfc9e94e6ca58efb69b2924b82.png" />
+</div>
 </div>
 <section id="exercise-4">
 <h3>Exercise 4<a class="headerlink" href="#exercise-4" title="Link to this heading">#</a></h3>
@@ -988,7 +1069,7 @@
 <p>What would a linear model have reported for the momentum effect, and why is that answer both wrong and unsurprising?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mom_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mom_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
 <span class="n">probe</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">mom_grid</span><span class="p">),</span> <span class="n">n_chars</span><span class="p">))</span>
 <span class="n">probe</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">mom_grid</span>
 
@@ -1014,6 +1095,9 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f240098c8c54d59cd45b404fd0c87e410933b29706a74f5a42cf3c0ed0b92eb0.png" src="../_images/f240098c8c54d59cd45b404fd0c87e410933b29706a74f5a42cf3c0ed0b92eb0.png" />
 </div>
 </div>
 </section>

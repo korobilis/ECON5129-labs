@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -506,7 +506,7 @@
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
 
 <span class="n">REPO_RAW</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/korobilis/ECON5129-labs/main"</span>
@@ -533,7 +533,7 @@
 <p>The whole algorithm is about thirty lines.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">best_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">best_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Find the variable and threshold that most reduce the sum of squared errors."""</span>
     <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">best</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"score"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">"feature"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"threshold"</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
@@ -599,7 +599,7 @@
 <p>The data generating process below has a threshold in it: the slope changes sign at <span class="math notranslate nohighlight">\(x = 0\)</span>. This is the kind of structure a tree finds easily and a linear model cannot represent at all.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">300</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="n">x_1d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 <span class="n">y_1d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x_1d</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x_1d</span><span class="p">,</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="mf">1.2</span> <span class="o">*</span> <span class="n">x_1d</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
 <span class="n">X_1d</span> <span class="o">=</span> <span class="n">x_1d</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
@@ -618,11 +618,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/ace9d4baf3f879973123b14f8e2e32e4df4ada4ae781f91f174300eb1abe90d3.png" src="../_images/ace9d4baf3f879973123b14f8e2e32e4df4ada4ae781f91f174300eb1abe90d3.png" />
+</div>
 </div>
 <p>Check the implementation against the reference one, and note how much faster the reference is: <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> implements the same algorithm in compiled code.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
 
 <span class="n">sk_tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_1d</span><span class="p">,</span> <span class="n">y_1d</span><span class="p">)</span>
 <span class="n">our_tree</span> <span class="o">=</span> <span class="n">grow_tree</span><span class="p">(</span><span class="n">X_1d</span><span class="p">,</span> <span class="n">y_1d</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -634,6 +637,13 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>our first split      : x &lt;= 1.7890
+scikit-learn's split : x &lt;= 1.7890
+maximum difference in predictions: 0.0000
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="part-2-instability-and-bagging">
@@ -641,7 +651,7 @@
 <p>A greedy tree commits to its first split before seeing what happens later. Change the sample slightly and that split can move, taking the entire structure below it with it. Trees are therefore low-bias, high-variance estimators, which is exactly the profile that averaging repairs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
     <span class="n">idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">tree_b</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_1d</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">y_1d</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
@@ -652,11 +662,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/394c7dbab6a5130bb622ac3b75ca10a813eed134015013e4d16a199c9fb7b8a5.png" src="../_images/394c7dbab6a5130bb622ac3b75ca10a813eed134015013e4d16a199c9fb7b8a5.png" />
+</div>
 </div>
 <p><strong>Bagging</strong> averages trees grown on bootstrap resamples. Because the bootstrap samples are drawn from the same data the trees are correlated, so the variance falls but not by the factor <span class="math notranslate nohighlight">\(1/B\)</span> that independence would give.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bagged_trees</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X_eval</span><span class="p">,</span> <span class="n">n_trees</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bagged_trees</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X_eval</span><span class="p">,</span> <span class="n">n_trees</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Average of trees fitted to bootstrap resamples."""</span>
     <span class="n">generator</span> <span class="o">=</span> <span class="n">generator</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_trees</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_eval</span><span class="p">)))</span>
@@ -681,6 +694,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/0a47329051aafd50deb09877e92feb0eaf0d187f6b5895b7468cca3587239ba7.png" src="../_images/0a47329051aafd50deb09877e92feb0eaf0d187f6b5895b7468cca3587239ba7.png" />
+</div>
 </div>
 <section id="exercise-1">
 <h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h3>
@@ -693,7 +709,7 @@
 <p>By what factor does bagging reduce the variance, and what happens to the bias?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_true_1d</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_true_1d</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="mf">1.2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
 
 
@@ -721,6 +737,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                      bias  variance      MSE
+estimator                                    
+single tree        0.02440   0.03481  0.03541
+bagged (50 trees)  0.03208   0.01954  0.02056
+
+variance reduction factor: 1.78
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -730,7 +756,7 @@
 <p>Forests also come with a free validation set. Each bootstrap sample omits about 37% of the observations, and averaging the predictions of the trees that did not see observation <span class="math notranslate nohighlight">\(i\)</span> gives an out-of-bag estimate of test error.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestRegressor</span>
 
 <span class="n">X_multi</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">y_multi</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">X_multi</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
@@ -749,6 +775,19 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              out-of-bag $R^2$
+max_features                  
+1                       0.3757
+2                       0.5445
+3                       0.6088
+5                       0.6421
+8                       0.6250
+
+max_features = 8 is bagging: every split sees every predictor.
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="part-4-boosting">
@@ -757,7 +796,7 @@
 <p>With squared error loss the algorithm is short: start from the mean, repeatedly fit a stump to the current residuals, and add a small multiple <span class="math notranslate nohighlight">\(\nu\)</span> of it to the running prediction.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gradient_boost</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X_eval</span><span class="p">,</span> <span class="n">n_rounds</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gradient_boost</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X_eval</span><span class="p">,</span> <span class="n">n_rounds</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Gradient boosting with squared error loss."""</span>
     <span class="n">prediction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     <span class="n">evaluation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_eval</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
@@ -785,6 +824,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/a0bda40efdb17aad4a95a0d7c9722af043a6ed8d0e306728efcdc9dbacd05451.png" src="../_images/a0bda40efdb17aad4a95a0d7c9722af043a6ed8d0e306728efcdc9dbacd05451.png" />
+</div>
 </div>
 <section id="exercise-2">
 <h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
@@ -797,7 +839,7 @@
 <p>Which combination of learning rate and number of rounds would you choose, and what is the cost of a small learning rate?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">split_at</span> <span class="o">=</span> <span class="mi">150</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">split_at</span> <span class="o">=</span> <span class="mi">150</span>
 <span class="n">Xb_tr</span><span class="p">,</span> <span class="n">Xb_te</span> <span class="o">=</span> <span class="n">X_1d</span><span class="p">[:</span><span class="n">split_at</span><span class="p">],</span> <span class="n">X_1d</span><span class="p">[</span><span class="n">split_at</span><span class="p">:]</span>
 <span class="n">yb_tr</span><span class="p">,</span> <span class="n">yb_te</span> <span class="o">=</span> <span class="n">y_1d</span><span class="p">[:</span><span class="n">split_at</span><span class="p">],</span> <span class="n">y_1d</span><span class="p">[</span><span class="n">split_at</span><span class="p">:]</span>
 
@@ -814,6 +856,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/e13e2d79a32e0477bc3725cd745137947eec480a1011823f3aed504ffb00c36a.png" src="../_images/e13e2d79a32e0477bc3725cd745137947eec480a1011823f3aed504ffb00c36a.png" />
+</div>
 </div>
 </section>
 </section>
@@ -824,7 +869,7 @@
 <p><strong>Partial dependence</strong> averages the fitted function over the empirical distribution of the other predictors. It is a causal object only if the model is causal, which it is not.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.inspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">permutation_importance</span><span class="p">,</span> <span class="n">partial_dependence</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.inspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">permutation_importance</span><span class="p">,</span> <span class="n">partial_dependence</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="n">Xm_tr</span><span class="p">,</span> <span class="n">Xm_te</span><span class="p">,</span> <span class="n">ym_tr</span><span class="p">,</span> <span class="n">ym_te</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_multi</span><span class="p">,</span> <span class="n">y_multi</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -849,6 +894,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/4b78b07e6b4812c27bd3f5c94f57a68a3ea025e6fe3da742a47dd72a5efcd190.png" src="../_images/4b78b07e6b4812c27bd3f5c94f57a68a3ea025e6fe3da742a47dd72a5efcd190.png" />
+</div>
 </div>
 <p>The forest recovers the shape of the sine without being told that a sine exists, and it correctly identifies that predictors five to eight do nothing. Note also that <span class="math notranslate nohighlight">\(x_2\)</span> and <span class="math notranslate nohighlight">\(x_3\)</span> matter only through their interaction, which permutation importance registers but partial dependence on either one alone would hide.</p>
 </section>
@@ -857,7 +905,7 @@
 <p>Back to the problem from Lab 3: the monthly change in unemployment, one month ahead, from 363 macroeconomic predictors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">HistGradientBoostingRegressor</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">HistGradientBoostingRegressor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LassoCV</span><span class="p">,</span> <span class="n">RidgeCV</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeSeriesSplit</span>
 
@@ -898,6 +946,17 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                     RMSE  out-of-sample $R^2$
+model                                         
+LASSO              0.1347               0.1856
+ridge              0.1337               0.1983
+random forest      0.1342               0.1914
+gradient boosting  0.1409               0.1088
+AR(3) benchmark    0.1493               0.0000
+</pre></div>
+</div>
+</div>
 </div>
 <section id="exercise-3">
 <h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Link to this heading">#</a></h3>
@@ -910,7 +969,7 @@
 <p>Does the ranking of methods depend on the state of the economy?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">recession</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_usrec</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">dates</span><span class="p">[</span><span class="n">split</span><span class="p">:])</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">==</span> <span class="mf">1.0</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recession</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_usrec</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">dates</span><span class="p">[</span><span class="n">split</span><span class="p">:])</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">==</span> <span class="mf">1.0</span>
 
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">predictions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -933,6 +992,22 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                   RMSE, recessions  RMSE, expansions
+model                                                
+LASSO                        0.1673            0.1314
+ridge                        0.1738            0.1294
+random forest                0.1719            0.1303
+gradient boosting            0.1838            0.1364
+AR(3) benchmark              0.2185            0.1413
+
+recession months in the evaluation sample: 18 of 216
+
+Diebold-Mariano, boosting against LASSO: statistic 1.698, p-value 0.091
+A negative statistic favours boosting.
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="exercise-4">
@@ -945,7 +1020,7 @@
 </ol>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">forest_macro</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="s2">"random forest"</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">forest_macro</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="s2">"random forest"</span><span class="p">]</span>
 <span class="n">imp_macro</span> <span class="o">=</span> <span class="n">permutation_importance</span><span class="p">(</span><span class="n">forest_macro</span><span class="p">,</span> <span class="n">Z_te</span><span class="p">,</span> <span class="n">y_te</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">,</span>
                                    <span class="n">n_repeats</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
@@ -962,6 +1037,23 @@
 <span class="p">})</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">series appearing in both lists: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">forest_top</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">lasso_top</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>forest, by permutation importance LASSO, by absolute coefficient
+                         USTPU.L1                     UEMPLT5.L1
+                        USGOOD.L1                       USTPU.L1
+                        MANEMP.L1                       IPMAT.L1
+                       UEMPLT5.L1                         HWI.L2
+                        PAYEMS.L1                         BAA.L3
+                           HWI.L2                    NDMANEMP.L2
+                        USGOOD.L2                     T10YFFM.L1
+                        CUMFNS.L1                         HWI.L1
+                       DMANEMP.L1                    FEDFUNDS.L3
+                     IPMANSICS.L1                     CLAIMSx.L1
+
+series appearing in both lists: ['HWI.L2', 'UEMPLT5.L1', 'USTPU.L1']
 </pre></div>
 </div>
 </div>

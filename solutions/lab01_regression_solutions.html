@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -437,30 +437,31 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-fit-versus-prediction">Part 2. Fit versus prediction</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-what-a-coefficient-measures">Part 2. What a coefficient measures</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-sampling-properties">Part 3. Sampling properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-fit-versus-prediction">Part 3. Fit versus prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-sampling-properties">Part 4. Sampling properties</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-variance-comes-from">Where the variance comes from</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-basis-expansions-and-overfitting">Part 4. Basis expansions and overfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-5-basis-expansions-and-overfitting">Part 5. Basis expansions and overfitting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-5-maximum-likelihood">Part 5. Maximum likelihood</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-6-maximum-likelihood">Part 6. Maximum likelihood</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-6-bayesian-regression">Part 6. Bayesian regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shrinkage-path">The shrinkage path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-7-bayesian-regression">Part 7. Bayesian regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-much-does-the-prior-matter">How much does the prior matter?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-distribution">Predictive distribution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6">Exercise 6</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-7-a-first-look-at-real-data">Part 7. A first look at real data</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-8-a-first-look-at-real-data">Part 8. A first look at real data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7">Exercise 7</a></li>
 </ul>
 </li>
@@ -483,11 +484,12 @@
 <p>This lab accompanies Lecture 1. By the end of the session you should be able to:</p>
 <ol class="arabic simple">
 <li><p>Compute the least squares estimator three different ways and explain why the textbook formula is the wrong way to program it.</p></li>
+<li><p>Show what a multiple regression coefficient measures, by recovering it from two simple regressions on residuals.</p></li>
 <li><p>Separate in-sample fit from out-of-sample prediction, and demonstrate that the first is no evidence of the second.</p></li>
 <li><p>Verify the sampling properties of <span class="math notranslate nohighlight">\(\widehat{\boldsymbol{\beta}}\)</span> by simulation, and see through the singular value decomposition why collinearity inflates variance.</p></li>
 <li><p>Fit nonlinear functions with a linear model through basis expansions, and watch overfitting appear.</p></li>
 <li><p>Estimate the same model by maximum likelihood, and change the likelihood to change the estimator.</p></li>
-<li><p>Derive the Bayesian posterior numerically, recognise the ridge estimator inside it, and produce predictive intervals.</p></li>
+<li><p>Derive the Bayesian posterior numerically and produce predictive intervals.</p></li>
 </ol>
 <p><strong>Plan for the session</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -500,23 +502,26 @@
 <tr class="row-even"><td><p>0:00 - 0:10</p></td>
 <td><p>Setup</p></td>
 </tr>
-<tr class="row-odd"><td><p>0:10 - 0:30</p></td>
+<tr class="row-odd"><td><p>0:10 - 0:25</p></td>
 <td><p>Part 1. Least squares three ways</p></td>
 </tr>
-<tr class="row-even"><td><p>0:30 - 0:50</p></td>
-<td><p>Part 2. Fit versus prediction</p></td>
+<tr class="row-even"><td><p>0:25 - 0:45</p></td>
+<td><p>Part 2. What a coefficient measures</p></td>
 </tr>
-<tr class="row-odd"><td><p>0:50 - 1:10</p></td>
-<td><p>Part 3. Sampling properties</p></td>
+<tr class="row-odd"><td><p>0:45 - 1:00</p></td>
+<td><p>Part 3. Fit versus prediction</p></td>
 </tr>
-<tr class="row-even"><td><p>1:10 - 1:30</p></td>
-<td><p>Part 4. Basis expansions and overfitting</p></td>
+<tr class="row-even"><td><p>1:00 - 1:15</p></td>
+<td><p>Part 4. Sampling properties</p></td>
 </tr>
-<tr class="row-odd"><td><p>1:30 - 1:45</p></td>
-<td><p>Part 5. Maximum likelihood</p></td>
+<tr class="row-odd"><td><p>1:15 - 1:35</p></td>
+<td><p>Part 5. Basis expansions and overfitting</p></td>
 </tr>
-<tr class="row-even"><td><p>1:45 - 2:00</p></td>
-<td><p>Part 6. Bayesian regression, and Part 7 on real data</p></td>
+<tr class="row-even"><td><p>1:35 - 1:45</p></td>
+<td><p>Part 6. Maximum likelihood</p></td>
+</tr>
+<tr class="row-odd"><td><p>1:45 - 2:00</p></td>
+<td><p>Part 7. Bayesian regression, and Part 8 on real data</p></td>
 </tr>
 </tbody>
 </table>
@@ -528,7 +533,7 @@
 <p>The cell below downloads the course helper module if it is not already present, then imports everything the lab needs. It works identically on Colab and on a local Anaconda installation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
 
 <span class="n">REPO_RAW</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/korobilis/ECON5129-labs/main"</span>
@@ -550,6 +555,11 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy 2.4.6, pandas 3.0.5
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="part-1-least-squares-three-ways">
@@ -563,7 +573,7 @@
 <p>We start with simulated data, so that we know the answer we are trying to recover.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">3</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">3</span>
 <span class="n">beta_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>   <span class="c1"># intercept first</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mf">1.0</span>
 
@@ -575,12 +585,17 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X has shape (200, 4), y has shape (200,)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Three routes to the same estimator.</p>
 <p><strong>Route 1: solve the normal equations.</strong> This forms <span class="math notranslate nohighlight">\(\mathbf{X}'\mathbf{X}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{X}'\mathbf{y}\)</span> and asks a linear solver for the answer. Note that we never invert anything.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">XtX</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">XtX</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span>
 <span class="n">Xty</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
 <span class="n">beta_normal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">XtX</span><span class="p">,</span> <span class="n">Xty</span><span class="p">)</span>
 </pre></div>
@@ -590,7 +605,7 @@
 <p><strong>Route 2: least squares directly.</strong> <code class="docutils literal notranslate"><span class="pre">np.linalg.lstsq</span></code> works from a QR decomposition of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, so it never forms <span class="math notranslate nohighlight">\(\mathbf{X}'\mathbf{X}\)</span> at all. This matters because squaring a matrix squares its condition number.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">beta_lstsq</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta_lstsq</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -598,7 +613,7 @@
 <p><strong>Route 3: scikit-learn.</strong> The interface you will use for the rest of the course. <code class="docutils literal notranslate"><span class="pre">fit_intercept=False</span></code> because our design matrix already contains a column of ones.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
 
 <span class="n">ols</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">beta_sklearn</span> <span class="o">=</span> <span class="n">ols</span><span class="o">.</span><span class="n">coef_</span>
@@ -608,7 +623,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">comparison</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">comparison</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">"true"</span><span class="p">:</span> <span class="n">beta_true</span><span class="p">,</span>
         <span class="s2">"normal equations"</span><span class="p">:</span> <span class="n">beta_normal</span><span class="p">,</span>
@@ -621,6 +636,63 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>true</th>
+      <th>normal equations</th>
+      <th>lstsq (QR)</th>
+      <th>scikit-learn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>intercept</th>
+      <td>1.0</td>
+      <td>1.118562</td>
+      <td>1.118562</td>
+      <td>1.118562</td>
+    </tr>
+    <tr>
+      <th>x1</th>
+      <td>-2.0</td>
+      <td>-2.102422</td>
+      <td>-2.102422</td>
+      <td>-2.102422</td>
+    </tr>
+    <tr>
+      <th>x2</th>
+      <td>0.5</td>
+      <td>0.505139</td>
+      <td>0.505139</td>
+      <td>0.505139</td>
+    </tr>
+    <tr>
+      <th>x3</th>
+      <td>3.0</td>
+      <td>3.061048</td>
+      <td>3.061048</td>
+      <td>3.061048</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>All three agree to printing precision, and all three are close to but not equal to the truth. That gap is estimation error, and quantifying it is the subject of Part 3.</p>
 <section id="why-you-should-never-write-inv-x-x">
@@ -628,7 +700,7 @@
 <p>The formula <span class="math notranslate nohighlight">\(\widehat{\boldsymbol{\beta}} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}\)</span> is how the estimator is <em>defined</em>, not how it should be <em>computed</em>. Explicit inversion is slower and numerically worse. The following design is nearly collinear, which is exactly the situation where the difference shows up.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">z1</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z1</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
 <span class="n">z2</span> <span class="o">=</span> <span class="n">z1</span> <span class="o">+</span> <span class="mf">1e-7</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>          <span class="c1"># almost identical to z1</span>
 <span class="n">X_ill</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">])</span>
 <span class="n">y_ill</span> <span class="o">=</span> <span class="n">X_ill</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
@@ -643,6 +715,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>condition number of X      : 2.154e+07
+condition number of X'X    : 4.537e+14
+residual sum of squares, inv: 1.85733937
+residual sum of squares, QR : 1.80158810
+</pre></div>
+</div>
+</div>
 </div>
 <p>The condition number of <span class="math notranslate nohighlight">\(\mathbf{X}'\mathbf{X}\)</span> is the square of the condition number of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>: forming the cross-product matrix throws away half of your available precision. Use <code class="docutils literal notranslate"><span class="pre">solve</span></code> or <code class="docutils literal notranslate"><span class="pre">lstsq</span></code>, never <code class="docutils literal notranslate"><span class="pre">inv</span></code>.</p>
 </section>
@@ -654,7 +734,7 @@
 <p>(where <span class="math notranslate nohighlight">\(p\)</span> counts the intercept), the standard errors <span class="math notranslate nohighlight">\(\sqrt{s^2 [(\mathbf{X}'\mathbf{X})^{-1}]_{jj}}\)</span>, the <span class="math notranslate nohighlight">\(t\)</span> statistics, and <span class="math notranslate nohighlight">\(R^2\)</span>. Use it on the simulated data and check that the true coefficients lie inside the implied 95% confidence intervals.</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ols</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ols</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Least squares estimation with standard errors."""</span>
     <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span><span class="p">)</span>
@@ -691,16 +771,157 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           estimate  std error  t stat  lower 95%  upper 95%  true
+intercept     1.119      0.069  16.118      0.983      1.255   1.0
+x1           -2.102      0.073 -28.931     -2.245     -1.960  -2.0
+x2            0.505      0.069   7.352      0.370      0.640   0.5
+x3            3.061      0.071  43.389      2.923      3.199   3.0
+
+R-squared: 0.9315, s2: 0.9422 (true sigma^2 = 1.0)
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
-<section id="part-2-fit-versus-prediction">
-<h2>Part 2. Fit versus prediction<a class="headerlink" href="#part-2-fit-versus-prediction" title="Link to this heading">#</a></h2>
+<section id="part-2-what-a-coefficient-measures">
+<h2>Part 2. What a coefficient measures<a class="headerlink" href="#part-2-what-a-coefficient-measures" title="Link to this heading">#</a></h2>
+<p>A multiple regression coefficient is not the relationship between <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span>. It is the relationship between the part of <span class="math notranslate nohighlight">\(y\)</span> that the other predictors cannot explain and the part of <span class="math notranslate nohighlight">\(x_j\)</span> that the other predictors cannot explain. The Frisch-Waugh-Lovell theorem states this precisely:</p>
+<div class="math notranslate nohighlight">
+\[ \widehat{\beta}_j = \frac{\widetilde{\mathbf{x}}_j' \widetilde{\mathbf{y}}}{\widetilde{\mathbf{x}}_j' \widetilde{\mathbf{x}}_j}, \]</div>
+<p>where <span class="math notranslate nohighlight">\(\widetilde{\mathbf{y}}\)</span> and <span class="math notranslate nohighlight">\(\widetilde{\mathbf{x}}_j\)</span> are the residuals from regressing <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> respectively on all the <em>other</em> predictors.</p>
+<p>This is not a curiosity. It is the reason a coefficient can change sign when a control is added, the logic behind every partialling-out argument in applied econometrics, and the device that makes modern high-dimensional causal estimators work.</p>
+<p>The predictors need to be correlated for any of it to bite, so we build a design where they are.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_fwl</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">Sigma_fwl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+<span class="n">X_fwl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_fwl</span><span class="p">),</span>
+    <span class="n">rng</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">Sigma_fwl</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_fwl</span><span class="p">),</span>
+<span class="p">])</span>
+<span class="n">y_fwl</span> <span class="o">=</span> <span class="n">X_fwl</span> <span class="o">@</span> <span class="n">beta_true</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n_fwl</span><span class="p">)</span>
+
+<span class="n">beta_multiple</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">X_fwl</span><span class="p">,</span> <span class="n">y_fwl</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now recover the coefficient on <span class="math notranslate nohighlight">\(x_1\)</span> the long way round: strip out the influence of the other predictors from both sides, then run one simple regression on the leftovers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">others</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">X_fwl</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>          <span class="c1"># intercept, x2, x3</span>
+
+<span class="n">y_resid</span> <span class="o">=</span> <span class="n">y_fwl</span> <span class="o">-</span> <span class="n">others</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">others</span><span class="p">,</span> <span class="n">y_fwl</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">x1_resid</span> <span class="o">=</span> <span class="n">X_fwl</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">others</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">others</span><span class="p">,</span> <span class="n">X_fwl</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">beta_partialled</span> <span class="o">=</span> <span class="p">(</span><span class="n">x1_resid</span> <span class="o">@</span> <span class="n">y_resid</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x1_resid</span> <span class="o">@</span> <span class="n">x1_resid</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"coefficient on x1, multiple regression : </span><span class="si">{</span><span class="n">beta_multiple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"coefficient on x1, partialled out      : </span><span class="si">{</span><span class="n">beta_partialled</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"difference                             : </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">beta_multiple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">beta_partialled</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>coefficient on x1, multiple regression : -2.0887597077
+coefficient on x1, partialled out      : -2.0887597077
+difference                             : 4.44e-15
+</pre></div>
+</div>
+</div>
+</div>
+<p>The two agree to machine precision. Plotting the residualised variables against each other gives the added-variable plot, which shows the only variation in <span class="math notranslate nohighlight">\(x_1\)</span> that the coefficient is actually estimated from.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_fwl</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">y_fwl</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">e5</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"$x_1$"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"$y$"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Raw data"</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1_resid</span><span class="p">,</span> <span class="n">y_resid</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">e5</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x1_resid</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x1_resid</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">beta_partialled</span> <span class="o">*</span> <span class="n">line</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">e5</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"slope = </span><span class="si">{</span><span class="n">beta_partialled</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"$x_1$ after removing $x_2$ and $x_3$"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"$y$ after removing $x_2$ and $x_3$"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Added-variable plot"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"variance of x1              : </span><span class="si">{</span><span class="n">X_fwl</span><span class="p">[:,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"variance of x1 after partialling: </span><span class="si">{</span><span class="n">x1_resid</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/acabb93631bc5fdfdaf504753ca27118dacacc267f1d8216c75200324ff6bea1.png" src="../_images/acabb93631bc5fdfdaf504753ca27118dacacc267f1d8216c75200324ff6bea1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>variance of x1              : 0.9983
+variance of x1 after partialling: 0.3428
+</pre></div>
+</div>
+</div>
+</div>
+<p>The second number is the one that matters. Correlation with the other predictors has consumed most of the variation in <span class="math notranslate nohighlight">\(x_1\)</span>, and the coefficient is estimated from what survives. That is the mechanism behind the variance inflation we will measure directly in Part 4.</p>
+<section id="exercise-2">
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
+<p>Partialling out explains what happens when a relevant predictor is left out of a regression.</p>
+<ol class="arabic simple">
+<li><p>Regress <span class="math notranslate nohighlight">\(y\)</span> on the intercept and <span class="math notranslate nohighlight">\(x_1\)</span> alone, and compare the coefficient with the multiple regression value. They differ: this is omitted variable bias.</p></li>
+<li><p>Regress <span class="math notranslate nohighlight">\(x_2\)</span> on the intercept and <span class="math notranslate nohighlight">\(x_1\)</span>, calling the slope <span class="math notranslate nohighlight">\(\delta\)</span>. Verify numerically that</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ \widehat{\beta}_1^{\text{ short}} \approx \widehat{\beta}_1 + \widehat{\beta}_2 \delta + \widehat{\beta}_3 \gamma, \]</div>
+<p>where <span class="math notranslate nohighlight">\(\gamma\)</span> is the slope from regressing <span class="math notranslate nohighlight">\(x_3\)</span> on <span class="math notranslate nohighlight">\(x_1\)</span>.
+3. Confirm that only one side needs partialling: regressing the raw <span class="math notranslate nohighlight">\(y\)</span> on <span class="math notranslate nohighlight">\(\widetilde{\mathbf{x}}_1\)</span> gives the same coefficient as regressing <span class="math notranslate nohighlight">\(\widetilde{\mathbf{y}}\)</span> on <span class="math notranslate nohighlight">\(\widetilde{\mathbf{x}}_1\)</span>. Explain why, using the fact that <span class="math notranslate nohighlight">\(\widetilde{\mathbf{x}}_1\)</span> is uncorrelated with the other predictors by construction.</p>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">short</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_fwl</span><span class="p">),</span> <span class="n">X_fwl</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">beta_short</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">short</span><span class="p">,</span> <span class="n">y_fwl</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">short</span><span class="p">,</span> <span class="n">X_fwl</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">short</span><span class="p">,</span> <span class="n">X_fwl</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">implied</span> <span class="o">=</span> <span class="n">beta_multiple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">beta_multiple</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">+</span> <span class="n">beta_multiple</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">gamma</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"short regression coefficient   : </span><span class="si">{</span><span class="n">beta_short</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"multiple regression coefficient: </span><span class="si">{</span><span class="n">beta_multiple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"omitted variable formula       : </span><span class="si">{</span><span class="n">implied</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">slope of x2 on x1 (delta): </span><span class="si">{</span><span class="n">delta</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"slope of x3 on x1 (gamma): </span><span class="si">{</span><span class="n">gamma</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">one_sided</span> <span class="o">=</span> <span class="p">(</span><span class="n">x1_resid</span> <span class="o">@</span> <span class="n">y_fwl</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x1_resid</span> <span class="o">@</span> <span class="n">x1_resid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">regressing raw y on residualised x1: </span><span class="si">{</span><span class="n">one_sided</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"regressing residualised y on residualised x1: </span><span class="si">{</span><span class="n">beta_partialled</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>short regression coefficient   : -0.863783
+multiple regression coefficient: -2.088760
+omitted variable formula       : -0.863783
+
+slope of x2 on x1 (delta): 0.8250
+slope of x3 on x1 (gamma): 0.2649
+
+regressing raw y on residualised x1: -2.0887597077
+regressing residualised y on residualised x1: -2.0887597077
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="part-3-fit-versus-prediction">
+<h2>Part 3. Fit versus prediction<a class="headerlink" href="#part-3-fit-versus-prediction" title="Link to this heading">#</a></h2>
 <p>Econometrics traditionally asks whether a coefficient is right. Machine learning asks whether the next prediction is right. The two questions can point in opposite directions, and the cleanest way to see this is to add predictors that are pure noise.</p>
 <p>By construction the following columns have nothing to do with <span class="math notranslate nohighlight">\(y\)</span>. Watch what happens to <span class="math notranslate nohighlight">\(R^2\)</span> anyway.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_train_split</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_train_split</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">X_full</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train_split</span><span class="p">),</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train_split</span><span class="p">,</span> <span class="n">p</span><span class="p">))])</span>
 <span class="n">y_full</span> <span class="o">=</span> <span class="n">X_full</span> <span class="o">@</span> <span class="n">beta_true</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train_split</span><span class="p">)</span>
 
@@ -726,12 +947,82 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>noise regressors</th>
+      <th>in-sample $R^2$</th>
+      <th>out-of-sample MSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0.9428</td>
+      <td>1.2158</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>0.9458</td>
+      <td>1.2705</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10</td>
+      <td>0.9444</td>
+      <td>1.2216</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>20</td>
+      <td>0.9481</td>
+      <td>1.2951</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>40</td>
+      <td>0.9698</td>
+      <td>2.4506</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>60</td>
+      <td>0.9777</td>
+      <td>3.1814</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>80</td>
+      <td>0.9886</td>
+      <td>4.9857</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>In-sample <span class="math notranslate nohighlight">\(R^2\)</span> rises monotonically towards one, while out-of-sample error deteriorates. Adding a regressor can never worsen the fit, because least squares can always set its coefficient to zero. That is exactly why in-sample fit is not evidence of anything.</p>
-<p>With <span class="math notranslate nohighlight">\(p\)</span> close to <span class="math notranslate nohighlight">\(n\)</span> the model interpolates the training data perfectly and predicts the test data disastrously. This is the whole motivation for Lecture 3.</p>
+<p>With <span class="math notranslate nohighlight">\(p\)</span> close to <span class="math notranslate nohighlight">\(n\)</span> the model interpolates the training data perfectly and predicts the test data disastrously. Any honest assessment of a model therefore has to be made on data the model has not seen.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">noise_counts</span><span class="p">,</span> <span class="n">r2_in</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"in-sample $R^2$"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"number of irrelevant regressors added"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"in-sample $R^2$"</span><span class="p">)</span>
@@ -748,58 +1039,20 @@
 </pre></div>
 </div>
 </div>
-</div>
-<section id="exercise-2">
-<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
-<p>The comparison above uses a single split, so part of what you see is luck. Make it robust.</p>
-<ol class="arabic simple">
-<li><p>Write a function <code class="docutils literal notranslate"><span class="pre">split_experiment(k,</span> <span class="pre">n_train,</span> <span class="pre">n_rep)</span></code> that repeats the experiment <code class="docutils literal notranslate"><span class="pre">n_rep</span></code> times with <span class="math notranslate nohighlight">\(k\)</span> noise regressors, each time drawing fresh data, and returns the average out-of-sample MSE.</p></li>
-<li><p>Run it for <span class="math notranslate nohighlight">\(k \in \{0, 10, 20, \dots, 80\}\)</span> with <code class="docutils literal notranslate"><span class="pre">n_train</span> <span class="pre">=</span> <span class="pre">100</span></code> and <code class="docutils literal notranslate"><span class="pre">n_rep</span> <span class="pre">=</span> <span class="pre">200</span></code>.</p></li>
-<li><p>Plot the average against <span class="math notranslate nohighlight">\(k\)</span>. At what ratio of <span class="math notranslate nohighlight">\(p\)</span> to <span class="math notranslate nohighlight">\(n\)</span> does the deterioration become severe?</p></li>
-</ol>
-<div class="cell tag_solution docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">split_experiment</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n_train</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_rep</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Average out-of-sample MSE with k irrelevant regressors added."""</span>
-    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_rep</span><span class="p">):</span>
-        <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train</span><span class="p">),</span>
-            <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train</span><span class="p">,</span> <span class="n">p</span><span class="p">)),</span>
-            <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train</span><span class="p">,</span> <span class="n">k</span><span class="p">)),</span>
-        <span class="p">])</span>
-        <span class="n">y_rep</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">@</span> <span class="n">beta_true</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n_train</span><span class="p">)</span>
-        <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Z</span><span class="p">[:</span><span class="n">n_train</span><span class="p">],</span> <span class="n">y_rep</span><span class="p">[:</span><span class="n">n_train</span><span class="p">],</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-        <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e5</span><span class="o">.</span><span class="n">mse</span><span class="p">(</span><span class="n">y_rep</span><span class="p">[</span><span class="n">n_train</span><span class="p">:],</span> <span class="n">Z</span><span class="p">[</span><span class="n">n_train</span><span class="p">:]</span> <span class="o">@</span> <span class="n">b</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
-
-
-<span class="n">k_grid</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">avg_mse</span> <span class="o">=</span> <span class="p">[</span><span class="n">split_experiment</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_grid</span><span class="p">]</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([(</span><span class="n">k</span> <span class="o">+</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_grid</span><span class="p">],</span> <span class="n">avg_mse</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">e5</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"irreducible error"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"$p / n$"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"average out-of-sample MSE"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Prediction error as the model fills up the sample"</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
+<div class="cell_output docutils container">
+<img alt="../_images/66eef3b2b058298a758963c963e8b03cecd4048e433fd772fdcd79228af76a04.png" src="../_images/66eef3b2b058298a758963c963e8b03cecd4048e433fd772fdcd79228af76a04.png" />
 </div>
 </div>
 </section>
-</section>
-<section id="part-3-sampling-properties">
-<h2>Part 3. Sampling properties<a class="headerlink" href="#part-3-sampling-properties" title="Link to this heading">#</a></h2>
+<section id="part-4-sampling-properties">
+<h2>Part 4. Sampling properties<a class="headerlink" href="#part-4-sampling-properties" title="Link to this heading">#</a></h2>
 <p>Under the classical assumptions,</p>
 <div class="math notranslate nohighlight">
 \[ \mathbb{E}[\widehat{\boldsymbol{\beta}}] = \boldsymbol{\beta}, \qquad \operatorname{Var}(\widehat{\boldsymbol{\beta}}) = \sigma^2 (\mathbf{X}'\mathbf{X})^{-1}. \]</div>
 <p>These are statements about repeated samples. Since we control the data generating process, we can draw those repeated samples and check.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_rep</span> <span class="o">=</span> <span class="mi">2000</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_rep</span> <span class="o">=</span> <span class="mi">2000</span>
 <span class="n">X_fixed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">))])</span>
 <span class="n">beta_draws</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_rep</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 
@@ -822,10 +1075,67 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>true</th>
+      <th>Monte Carlo mean</th>
+      <th>Monte Carlo sd</th>
+      <th>theoretical sd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>intercept</th>
+      <td>1.0</td>
+      <td>0.9975</td>
+      <td>0.0722</td>
+      <td>0.0711</td>
+    </tr>
+    <tr>
+      <th>x1</th>
+      <td>-2.0</td>
+      <td>-2.0007</td>
+      <td>0.0714</td>
+      <td>0.0734</td>
+    </tr>
+    <tr>
+      <th>x2</th>
+      <td>0.5</td>
+      <td>0.5003</td>
+      <td>0.0745</td>
+      <td>0.0743</td>
+    </tr>
+    <tr>
+      <th>x3</th>
+      <td>3.0</td>
+      <td>2.9998</td>
+      <td>0.0715</td>
+      <td>0.0711</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">beta_draws</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
         <span class="n">color</span><span class="o">=</span><span class="n">e5</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">"white"</span><span class="p">)</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">beta_draws</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">beta_draws</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">300</span><span class="p">)</span>
@@ -840,16 +1150,19 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/3254ad0c364142ef3b433d112434b94e986f0e72512324cd4a7f32e9aa2e6449.png" src="../_images/3254ad0c364142ef3b433d112434b94e986f0e72512324cd4a7f32e9aa2e6449.png" />
+</div>
 </div>
 <section id="where-the-variance-comes-from">
 <h3>Where the variance comes from<a class="headerlink" href="#where-the-variance-comes-from" title="Link to this heading">#</a></h3>
 <p>Write the singular value decomposition <span class="math notranslate nohighlight">\(\mathbf{X} = \mathbf{U}\mathbf{D}\mathbf{V}'\)</span> with singular values <span class="math notranslate nohighlight">\(d_1 \ge \dots \ge d_p &gt; 0\)</span>. Then</p>
 <div class="math notranslate nohighlight">
 \[ \operatorname{Var}(\widehat{\boldsymbol{\beta}}) = \sigma^2 (\mathbf{X}'\mathbf{X})^{-1} = \sigma^2 \sum_{j=1}^{p} \frac{1}{d_j^2} \mathbf{v}_j \mathbf{v}_j'. \]</div>
-<p>Directions in predictor space with little variation, meaning small <span class="math notranslate nohighlight">\(d_j\)</span>, contribute enormous variance. This single expression is the reason shrinkage exists, and we will return to it in Lecture 3.</p>
+<p>Directions in predictor space with little variation, meaning small <span class="math notranslate nohighlight">\(d_j\)</span>, contribute enormous variance. This is the same fact that Part 2 showed from the other side: once the other predictors have absorbed most of the variation in <span class="math notranslate nohighlight">\(x_j\)</span>, the coefficient on <span class="math notranslate nohighlight">\(x_j\)</span> is estimated from very little.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">X_fixed</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">X_fixed</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">contrib</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">d</span> <span class="o">**</span> <span class="mi">2</span>
 <span class="n">svd_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -863,6 +1176,58 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>singular value $d_j$</th>
+      <th>variance contribution $\sigma^2 / d_j^2$</th>
+      <th>share of total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15.403238</td>
+      <td>0.004215</td>
+      <td>0.200389</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>14.248651</td>
+      <td>0.004926</td>
+      <td>0.234180</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>13.409116</td>
+      <td>0.005562</td>
+      <td>0.264422</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>12.567798</td>
+      <td>0.006331</td>
+      <td>0.301009</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="exercise-3">
@@ -878,7 +1243,7 @@
 </ol>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="mf">0.95</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="mf">0.95</span>
 <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 <span class="n">Sigma</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">idx</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">-</span> <span class="n">idx</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:])</span>
 <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">Sigma</span><span class="p">)</span>
@@ -909,17 +1274,29 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           sd, independent  sd, rho = 0.95  inflation factor    bias
+intercept           0.0722          0.0700            0.9688  0.0011
+x1                  0.0714          0.2224            3.1164 -0.0067
+x2                  0.0745          0.3060            4.1083 -0.0002
+x3                  0.0715          0.2333            3.2651  0.0045
+
+singular values, independent design: [15.4  14.25 13.41 12.57]
+singular values, correlated design : [23.46 14.14  4.23  2.63]
+</pre></div>
 </div>
-<p>The estimator remains unbiased, exactly as Gauss-Markov promises. What collapses is precision. Unbiasedness on its own is close to worthless for prediction, which is the opening argument of Lecture 3.</p>
+</div>
+</div>
+<p>The estimator remains unbiased, exactly as Gauss-Markov promises. What collapses is precision. An estimator can be centred on the truth and still be useless, because any single sample lands far from that centre.</p>
 </section>
 </section>
-<section id="part-4-basis-expansions-and-overfitting">
-<h2>Part 4. Basis expansions and overfitting<a class="headerlink" href="#part-4-basis-expansions-and-overfitting" title="Link to this heading">#</a></h2>
+<section id="part-5-basis-expansions-and-overfitting">
+<h2>Part 5. Basis expansions and overfitting<a class="headerlink" href="#part-5-basis-expansions-and-overfitting" title="Link to this heading">#</a></h2>
 <p>“Linear regression” means linear in <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span>, not linear in <span class="math notranslate nohighlight">\(x\)</span>. Replacing <span class="math notranslate nohighlight">\(x\)</span> with a vector of transformations <span class="math notranslate nohighlight">\(\boldsymbol{\phi}(x) = (\phi_1(x), \dots, \phi_M(x))'\)</span> leaves every formula above intact while allowing arbitrary curvature.</p>
 <p>The underlying function below is <span class="math notranslate nohighlight">\(f(x) = \sin(2\pi x)\)</span>, which no polynomial reproduces exactly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_true</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_true</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
 
 
@@ -941,7 +1318,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -959,11 +1336,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/bb021b6e227780cb7e0857641407b4138caee976aa43f20208d6044d241737dc.png" src="../_images/bb021b6e227780cb7e0857641407b4138caee976aa43f20208d6044d241737dc.png" />
+</div>
 </div>
 <p>The degree 15 fit passes very close to the training points and behaves badly between them. To make that precise, track training and test error as a function of the degree.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">max_deg</span> <span class="o">=</span> <span class="mi">18</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_deg</span> <span class="o">=</span> <span class="mi">18</span>
 <span class="n">train_mse</span><span class="p">,</span> <span class="n">test_mse</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_deg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
@@ -986,6 +1366,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/28414a1db594db5ac48ddd21f6cdef68b4799fd29e5522575de0b2dbe6430804.png" src="../_images/28414a1db594db5ac48ddd21f6cdef68b4799fd29e5522575de0b2dbe6430804.png" />
+</div>
 </div>
 <section id="exercise-4">
 <h3>Exercise 4<a class="headerlink" href="#exercise-4" title="Link to this heading">#</a></h3>
@@ -1001,7 +1384,7 @@
 <p>The two will achieve similar test error on this problem. Look at where they differ rather than at the headline number.</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rbf_basis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">centres</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rbf_basis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">centres</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Gaussian radial basis design matrix with an intercept column."""</span>
     <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">-</span> <span class="n">centres</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:])</span> <span class="o">/</span> <span class="n">width</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">Z</span><span class="p">])</span>
@@ -1051,11 +1434,18 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/ca0a46bf612659a01837a10d5af9af10fa6b3615d194967b74cd4cb052d223a9.png" src="../_images/ca0a46bf612659a01837a10d5af9af10fa6b3615d194967b74cd4cb052d223a9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>best test MSE, polynomial   : 0.0612
+best test MSE, radial basis : 0.0624
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
-<section id="part-5-maximum-likelihood">
-<h2>Part 5. Maximum likelihood<a class="headerlink" href="#part-5-maximum-likelihood" title="Link to this heading">#</a></h2>
+<section id="part-6-maximum-likelihood">
+<h2>Part 6. Maximum likelihood<a class="headerlink" href="#part-6-maximum-likelihood" title="Link to this heading">#</a></h2>
 <p>Adding the assumption <span class="math notranslate nohighlight">\(\varepsilon_i \sim N(0, \sigma^2)\)</span> turns the model into a probability statement, with log-likelihood</p>
 <div class="math notranslate nohighlight">
 \[ \ell(\boldsymbol{\beta}, \sigma^2) = -\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^{n}(y_i - \mathbf{x}_i'\boldsymbol{\beta})^2 . \]</div>
@@ -1063,7 +1453,7 @@
 <p>We parametrise by <span class="math notranslate nohighlight">\(\log \sigma\)</span> so that the optimiser can roam over the whole real line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">neg_loglik</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">neg_loglik</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Negative Gaussian log-likelihood; theta = (beta, log sigma)."""</span>
     <span class="n">beta</span><span class="p">,</span> <span class="n">log_sigma</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_sigma</span><span class="p">)</span>
@@ -1092,6 +1482,19 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           least squares  maximum likelihood  true
+intercept       1.118562            1.118562   1.0
+x1             -2.102422           -2.102422  -2.0
+x2              0.505139            0.505138   0.5
+x3              3.061048            3.061048   3.0
+
+MLE of sigma^2       : 0.9234
+unbiased estimate s2 : 0.9422
+ratio                : 0.9800  vs  (n - p)/n = 0.9800
+</pre></div>
+</div>
+</div>
 </div>
 <p>The coefficients coincide. The variance estimates do not: the maximum likelihood estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span> divides by <span class="math notranslate nohighlight">\(n\)</span> rather than <span class="math notranslate nohighlight">\(n - p\)</span>, and is therefore biased downwards by exactly the factor <span class="math notranslate nohighlight">\((n-p)/n\)</span>.</p>
 <section id="exercise-5">
@@ -1107,7 +1510,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">stats.t.logpdf</span></code> will give you the log density.</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_contam</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_contam</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">outliers</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">y_contam</span><span class="p">[</span><span class="n">outliers</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">15.0</span>
 
@@ -1146,19 +1549,29 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           true  least squares  Student t MLE
+intercept   1.0          1.468          1.179
+x1         -2.0         -1.846         -2.091
+x2          0.5          0.659          0.554
+x3          3.0          3.239          3.079
+</pre></div>
+</div>
+<img alt="../_images/ada7d392617ac402fd2d3d4fc480aa8c647abeddb6f638e98339b3ab169dd21c.png" src="../_images/ada7d392617ac402fd2d3d4fc480aa8c647abeddb6f638e98339b3ab169dd21c.png" />
+</div>
 </div>
 </section>
 </section>
-<section id="part-6-bayesian-regression">
-<h2>Part 6. Bayesian regression<a class="headerlink" href="#part-6-bayesian-regression" title="Link to this heading">#</a></h2>
+<section id="part-7-bayesian-regression">
+<h2>Part 7. Bayesian regression<a class="headerlink" href="#part-7-bayesian-regression" title="Link to this heading">#</a></h2>
 <p>Place a prior <span class="math notranslate nohighlight">\(\boldsymbol{\beta} \sim N(\mathbf{0}, \tau^2 \mathbf{I})\)</span> and treat <span class="math notranslate nohighlight">\(\sigma^2\)</span> as known. Combining prior and likelihood gives a Gaussian posterior with</p>
 <div class="math notranslate nohighlight">
 \[ \mathbf{V}_{\text{post}} = \left( \frac{\mathbf{X}'\mathbf{X}}{\sigma^2} + \frac{\mathbf{I}}{\tau^2} \right)^{-1}, \qquad \boldsymbol{\mu}_{\text{post}} = \mathbf{V}_{\text{post}} \frac{\mathbf{X}'\mathbf{y}}{\sigma^2}. \]</div>
-<p>The posterior mean, which is also the MAP estimate under a Gaussian posterior, is algebraically identical to ridge regression with <span class="math notranslate nohighlight">\(\lambda = \sigma^2/\tau^2\)</span>. Regularisation and prior information are the same statement in two languages.</p>
+<p>The posterior mean is also the maximum a posteriori estimate, since the posterior is Gaussian. Read the two terms in the precision matrix: the data contribute <span class="math notranslate nohighlight">\(\mathbf{X}'\mathbf{X}/\sigma^2\)</span> and the prior contributes <span class="math notranslate nohighlight">\(\mathbf{I}/\tau^2\)</span>, so a tight prior counts for as much as a large sample.</p>
 <p>To make the prior bite, we use a small sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_small</span> <span class="o">=</span> <span class="mi">25</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_small</span> <span class="o">=</span> <span class="mi">25</span>
 <span class="n">X_small</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_small</span><span class="p">),</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_small</span><span class="p">,</span> <span class="n">p</span><span class="p">))])</span>
 <span class="n">y_small</span> <span class="o">=</span> <span class="n">X_small</span> <span class="o">@</span> <span class="n">beta_true</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n_small</span><span class="p">)</span>
 
@@ -1174,30 +1587,39 @@
 <span class="n">tau2</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">mu_post</span><span class="p">,</span> <span class="n">V_post</span> <span class="o">=</span> <span class="n">bayes_regression</span><span class="p">(</span><span class="n">X_small</span><span class="p">,</span> <span class="n">y_small</span><span class="p">,</span> <span class="n">tau2</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 
-<span class="n">lam</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">tau2</span>
-<span class="n">beta_ridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">X_small</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X_small</span> <span class="o">+</span> <span class="n">lam</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">X_small</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
-                             <span class="n">X_small</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y_small</span><span class="p">)</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">"true"</span><span class="p">:</span> <span class="n">beta_true</span><span class="p">,</span>
         <span class="s2">"least squares"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">X_small</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X_small</span><span class="p">,</span> <span class="n">X_small</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y_small</span><span class="p">),</span>
         <span class="s2">"posterior mean"</span><span class="p">:</span> <span class="n">mu_post</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s2">"ridge, lambda = </span><span class="si">{</span><span class="n">lam</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">"</span><span class="p">:</span> <span class="n">beta_ridge</span><span class="p">,</span>
         <span class="s2">"posterior sd"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">V_post</span><span class="p">)),</span>
     <span class="p">},</span>
     <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"intercept"</span><span class="p">,</span> <span class="s2">"x1"</span><span class="p">,</span> <span class="s2">"x2"</span><span class="p">,</span> <span class="s2">"x3"</span><span class="p">],</span>
 <span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">with n = </span><span class="si">{</span><span class="n">n_small</span><span class="si">}</span><span class="s2"> the posterior mean sits between the prior mean of zero "</span>
+      <span class="sa">f</span><span class="s2">"and the least squares estimate"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           true  least squares  posterior mean  posterior sd
+intercept   1.0         1.1378          1.0881        0.1968
+x1         -2.0        -2.1166         -2.0401        0.2126
+x2          0.5         0.6915          0.6413        0.1965
+x3          3.0         3.1434          3.0131        0.2076
+
+with n = 25 the posterior mean sits between the prior mean of zero and the least squares estimate
 </pre></div>
 </div>
 </div>
 </div>
-<section id="the-shrinkage-path">
-<h3>The shrinkage path<a class="headerlink" href="#the-shrinkage-path" title="Link to this heading">#</a></h3>
-<p>As <span class="math notranslate nohighlight">\(\tau^2 \to \infty\)</span> the prior becomes uninformative and the posterior mean converges to least squares. As <span class="math notranslate nohighlight">\(\tau^2 \to 0\)</span> every coefficient is pulled to zero. The path between the two is the ridge path of Lecture 3, viewed from the Bayesian side.</p>
+<section id="how-much-does-the-prior-matter">
+<h3>How much does the prior matter?<a class="headerlink" href="#how-much-does-the-prior-matter" title="Link to this heading">#</a></h3>
+<p>As <span class="math notranslate nohighlight">\(\tau^2 \to \infty\)</span> the prior becomes uninformative and the posterior mean converges to least squares. As <span class="math notranslate nohighlight">\(\tau^2 \to 0\)</span> every coefficient is pulled to the prior mean of zero. Everything interesting happens between those two limits, and where a given sample sits on that path depends on how much information the data actually carry.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tau2_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tau2_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
 <span class="n">paths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">bayes_regression</span><span class="p">(</span><span class="n">X_small</span><span class="p">,</span> <span class="n">y_small</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tau2_grid</span><span class="p">])</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -1213,6 +1635,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/409fcd200aa57fc4af000271a83a79c25edf9b604557ae3d5d96a03ba058397d.png" src="../_images/409fcd200aa57fc4af000271a83a79c25edf9b604557ae3d5d96a03ba058397d.png" />
+</div>
 </div>
 </section>
 <section id="predictive-distribution">
@@ -1223,7 +1648,7 @@
 <p>The two variance terms separate parameter uncertainty from irreducible noise. We illustrate this with a single predictor and a basis expansion, so the bands can be drawn.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
 <span class="n">y_b</span> <span class="o">=</span> <span class="n">f_true</span><span class="p">(</span><span class="n">x_b</span><span class="p">)</span> <span class="o">+</span> <span class="n">noise</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
 <span class="n">centres_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
@@ -1257,8 +1682,11 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/11da15ebe725e694b90a7de7a72e0a5c3340d9fcd097c976523e5bf0499be8ad.png" src="../_images/11da15ebe725e694b90a7de7a72e0a5c3340d9fcd097c976523e5bf0499be8ad.png" />
 </div>
-<p>Notice that the bands widen where the data are sparse. A point estimate cannot tell you that, and this is precisely the property that makes Gaussian processes attractive in Lecture 5.</p>
+</div>
+<p>Notice that the bands widen where the data are sparse. A point estimate cannot tell you that, and a forecast without a statement of its own uncertainty is an assertion rather than an estimate.</p>
 </section>
 <section id="exercise-6">
 <h3>Exercise 6<a class="headerlink" href="#exercise-6" title="Link to this heading">#</a></h3>
@@ -1270,7 +1698,7 @@
 </ol>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">coverage</span><span class="p">(</span><span class="n">tau2_value</span><span class="p">,</span> <span class="n">n_new</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">coverage</span><span class="p">(</span><span class="n">tau2_value</span><span class="p">,</span> <span class="n">n_new</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
     <span class="n">mu_c</span><span class="p">,</span> <span class="n">V_c</span> <span class="o">=</span> <span class="n">bayes_regression</span><span class="p">(</span><span class="n">rbf</span><span class="p">(</span><span class="n">x_b</span><span class="p">),</span> <span class="n">y_b</span><span class="p">,</span> <span class="n">tau2_value</span><span class="p">,</span> <span class="n">noise</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">x_new</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_new</span><span class="p">)</span>
     <span class="n">y_new</span> <span class="o">=</span> <span class="n">f_true</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span> <span class="o">+</span> <span class="n">noise</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n_new</span><span class="p">)</span>
@@ -1288,16 +1716,22 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tau^2 =   1.0: coverage = 0.968, predictive MSE = 0.0785
+tau^2 =  0.01: coverage = 0.794, predictive MSE = 0.1684
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
-<section id="part-7-a-first-look-at-real-data">
-<h2>Part 7. A first look at real data<a class="headerlink" href="#part-7-a-first-look-at-real-data" title="Link to this heading">#</a></h2>
+<section id="part-8-a-first-look-at-real-data">
+<h2>Part 8. A first look at real data<a class="headerlink" href="#part-8-a-first-look-at-real-data" title="Link to this heading">#</a></h2>
 <p>We close with the FRED-MD panel, the macroeconomic dataset that will run through most of the remaining labs. It contains 126 monthly US series from 1959 onwards, together with a transformation code for each series that renders it stationary.</p>
 <p>The target is monthly industrial production growth. The predictors are a small, deliberately conventional set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fredmd</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fredmd</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> months from </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">%Y-%m</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">%Y-%m</span><span class="si">}</span><span class="s2">, "</span>
       <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> series"</span><span class="p">)</span>
 
@@ -1325,12 +1759,27 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>801 months from 1959-01 to 2025-09, 126 series
+           estimate  std error  t stat
+intercept    0.1804     0.0288  6.2534
+UNRATE      -1.2009     0.1424 -8.4335
+FEDFUNDS     0.2562     0.0489  5.2347
+S&amp;P 500     -0.8727     0.6870 -1.2703
+CPIAUCSL    -6.7148     8.8811 -0.7561
+CLAIMSx     -4.5126     0.5249 -8.5972
+T10YFFM      0.0233     0.0154  1.5145
+
+n = 720,  R-squared = 0.2804
+</pre></div>
+</div>
+</div>
 </div>
 <p>Two features of that table are worth pausing on. The intercept recovers average monthly industrial production growth of roughly 0.18%. The coefficient on equity returns is insignificant and carries the wrong sign, which is routine in a correlated design and a first warning that individual coefficients are not the same object as a good prediction.</p>
 <p>An <span class="math notranslate nohighlight">\(R^2\)</span> of this size is entirely normal for monthly growth rates: most month-to-month movement in industrial production is unforecastable. Keep that number in mind, because for the rest of the course the question is never “is the fit good” but “is it better than the benchmark, out of sample”.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y_macro</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">e5</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"actual"</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">X_macro</span> <span class="o">@</span> <span class="n">beta_macro</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">e5</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"fitted"</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"IP growth, % per month"</span><span class="p">)</span>
@@ -1346,6 +1795,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/0147b5759a9babcefe7f13abe033132ec5318ef7747d0e7a5a2460f65c8fcd2f.png" src="../_images/0147b5759a9babcefe7f13abe033132ec5318ef7747d0e7a5a2460f65c8fcd2f.png" />
+</div>
 </div>
 <section id="exercise-7">
 <h3>Exercise 7<a class="headerlink" href="#exercise-7" title="Link to this heading">#</a></h3>
@@ -1358,7 +1810,7 @@
 <p>What does this suggest about the assumption of constant error variance, and about what a linear model with fixed coefficients can capture?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_usrec</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_usrec</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 <span class="n">in_rec</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">==</span> <span class="mf">1.0</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"months in recession : </span><span class="si">{</span><span class="n">in_rec</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">in_rec</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -1377,16 +1829,24 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>months in recession : 93 of 720
+RMSE in recessions  : 0.9606
+RMSE in expansions  : 0.5705
+</pre></div>
+</div>
+<img alt="../_images/b9885623d87b22097b7e55f022dbdd730945dfd019ab85b33ae0e753d4ac043b.png" src="../_images/b9885623d87b22097b7e55f022dbdd730945dfd019ab85b33ae0e753d4ac043b.png" />
+</div>
 </div>
 </section>
 </section>
 <section id="take-home-challenges">
 <h2>Take-home challenges<a class="headerlink" href="#take-home-challenges" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><strong>Frisch-Waugh-Lovell.</strong> Regress <code class="docutils literal notranslate"><span class="pre">INDPRO</span></code> growth on <code class="docutils literal notranslate"><span class="pre">UNRATE</span></code> alone after partialling out the remaining predictors from both, and verify that you recover exactly the multiple regression coefficient on <code class="docutils literal notranslate"><span class="pre">UNRATE</span></code>. Explain what this says about what a regression coefficient measures.</p></li>
-<li><p><strong>Degrees of freedom.</strong> For the radial basis fit, compute the number of basis functions at which training error reaches zero, and confirm that this happens when the number of columns equals <span class="math notranslate nohighlight">\(n\)</span>. Relate it to the interpolation threshold you found in Exercise 2.</p></li>
-<li><p><strong>Ridge as data augmentation.</strong> Show numerically that ridge regression with penalty <span class="math notranslate nohighlight">\(\lambda\)</span> is ordinary least squares applied to the augmented data <span class="math notranslate nohighlight">\(\tilde{\mathbf{X}} = [\mathbf{X}; \sqrt{\lambda}\mathbf{I}]\)</span> and <span class="math notranslate nohighlight">\(\tilde{\mathbf{y}} = [\mathbf{y}; \mathbf{0}]\)</span>. Relate the augmented rows to the prior of Part 6.</p></li>
-<li><p><strong>Prior sensitivity.</strong> Repeat Part 6 with a prior centred away from zero, <span class="math notranslate nohighlight">\(\boldsymbol{\beta} \sim N(\mathbf{b}_0, \tau^2\mathbf{I})\)</span> with <span class="math notranslate nohighlight">\(\mathbf{b}_0 = (0, 1, 1, 1)'\)</span>. Derive the modified posterior mean, implement it, and show how quickly the data overwhelm a wrong prior as <span class="math notranslate nohighlight">\(n\)</span> grows.</p></li>
+<li><p><strong>Partialling out on real data.</strong> Using the FRED-MD regression of Part 8, recover the coefficient on <code class="docutils literal notranslate"><span class="pre">UNRATE</span></code> by residualising both the target and <code class="docutils literal notranslate"><span class="pre">UNRATE</span></code> against the remaining predictors, exactly as in Part 2. Then produce the added-variable plot and report how much of the variation in <code class="docutils literal notranslate"><span class="pre">UNRATE</span></code> survives the partialling. What does that tell you about how much the sample really says about this coefficient?</p></li>
+<li><p><strong>Fit versus prediction, made robust.</strong> The comparison in Part 3 uses a single split, so part of what it shows is luck. Write a function that repeats the experiment with <span class="math notranslate nohighlight">\(k\)</span> irrelevant regressors over many fresh samples and returns the average out-of-sample error. Run it for <span class="math notranslate nohighlight">\(k\)</span> from 0 to 80 with 100 training observations, and plot the average against <span class="math notranslate nohighlight">\(p/n\)</span>. At what ratio does the deterioration become severe?</p></li>
+<li><p><strong>Degrees of freedom.</strong> For the radial basis fit of Part 5, find the number of basis functions at which training error reaches zero, and confirm that this happens when the number of columns equals <span class="math notranslate nohighlight">\(n\)</span>. Relate it to what you found in the previous challenge.</p></li>
+<li><p><strong>Prior sensitivity.</strong> Repeat Part 7 with a prior centred away from zero, <span class="math notranslate nohighlight">\(\boldsymbol{\beta} \sim N(\mathbf{b}_0, \tau^2\mathbf{I})\)</span> with <span class="math notranslate nohighlight">\(\mathbf{b}_0 = (0, 1, 1, 1)'\)</span>. Derive the modified posterior mean, implement it, and show how quickly the data overwhelm a wrong prior as <span class="math notranslate nohighlight">\(n\)</span> grows.</p></li>
 </ol>
 <hr class="docutils" />
 <p><strong>Next</strong>: Lecture 2 turns from predicting a number to predicting a label. Lab 2 builds the Bayes classifier, <span class="math notranslate nohighlight">\(k\)</span>-nearest neighbours, discriminant analysis and logistic regression, and applies them to dating US recessions.</p>
@@ -1465,30 +1925,31 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-fit-versus-prediction">Part 2. Fit versus prediction</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-what-a-coefficient-measures">Part 2. What a coefficient measures</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-sampling-properties">Part 3. Sampling properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-fit-versus-prediction">Part 3. Fit versus prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-sampling-properties">Part 4. Sampling properties</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-the-variance-comes-from">Where the variance comes from</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-basis-expansions-and-overfitting">Part 4. Basis expansions and overfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-5-basis-expansions-and-overfitting">Part 5. Basis expansions and overfitting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-5-maximum-likelihood">Part 5. Maximum likelihood</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-6-maximum-likelihood">Part 6. Maximum likelihood</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-6-bayesian-regression">Part 6. Bayesian regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shrinkage-path">The shrinkage path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-7-bayesian-regression">Part 7. Bayesian regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-much-does-the-prior-matter">How much does the prior matter?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-distribution">Predictive distribution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6">Exercise 6</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-7-a-first-look-at-real-data">Part 7. A first look at real data</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-8-a-first-look-at-real-data">Part 8. A first look at real data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7">Exercise 7</a></li>
 </ul>
 </li>

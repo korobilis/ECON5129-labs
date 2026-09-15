@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -510,7 +510,7 @@
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
 
 <span class="n">REPO_RAW</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/korobilis/ECON5129-labs/main"</span>
@@ -537,7 +537,7 @@
 <p>Draw <span class="math notranslate nohighlight">\(n\)</span> points uniformly in the unit cube <span class="math notranslate nohighlight">\([0,1]^d\)</span> and measure the distance from the centre to the closest one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_points</span> <span class="o">=</span> <span class="mi">500</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_points</span> <span class="o">=</span> <span class="mi">500</span>
 <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
 
 <span class="n">median_distance</span> <span class="o">=</span> <span class="p">[]</span>
@@ -567,6 +567,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/275bd9e3cb2012fefd8c6e6cc33e9994556acdcb900e83358421ecf22efc055b.png" src="../_images/275bd9e3cb2012fefd8c6e6cc33e9994556acdcb900e83358421ecf22efc055b.png" />
+</div>
 </div>
 <p>To capture even 1% of the sample in ten dimensions the neighbourhood must span roughly 63% of the range of every variable. It is no longer a neighbourhood, and any method that averages over it is no longer local. This is why the methods in this lab are used with a handful of predictors, and why Lecture 7 turns to a different strategy entirely.</p>
 </section>
@@ -578,7 +581,7 @@
 <p>with the bandwidth <span class="math notranslate nohighlight">\(h\)</span> controlling how quickly the weights decay.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_true</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_true</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span>
 
 
@@ -609,6 +612,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/00e0776c2cee820a82da971ebba85794975e2e7727f6673f9ce8e84fead1a91e.png" src="../_images/00e0776c2cee820a82da971ebba85794975e2e7727f6673f9ce8e84fead1a91e.png" />
+</div>
 </div>
 <section id="boundary-bias">
 <h3>Boundary bias<a class="headerlink" href="#boundary-bias" title="Link to this heading">#</a></h3>
@@ -618,7 +624,7 @@
 <p>and reporting <span class="math notranslate nohighlight">\(\widehat{a}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">local_linear</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">local_linear</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Local linear regression at each evaluation point."""</span>
     <span class="n">fitted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_eval</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">x0</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x_eval</span><span class="p">):</span>
@@ -643,6 +649,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/2208961d118799bf0f73b5e0f908cc172c80e1211833afda3c3571ae6e35e17c.png" src="../_images/2208961d118799bf0f73b5e0f908cc172c80e1211833afda3c3571ae6e35e17c.png" />
+</div>
 </div>
 </section>
 <section id="exercise-1">
@@ -655,7 +664,7 @@
 </ol>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">loocv_score</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">loocv_score</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Leave-one-out cross-validation error using the smoother matrix diagonal."""</span>
     <span class="n">S</span> <span class="o">=</span> <span class="n">gaussian_kernel_weights</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
     <span class="n">fitted</span> <span class="o">=</span> <span class="n">S</span> <span class="o">@</span> <span class="n">y</span>
@@ -683,6 +692,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/48e8426f611b8af505dfbbf27160679bb38968ce0358439fab09254f55dabe96.png" src="../_images/48e8426f611b8af505dfbbf27160679bb38968ce0358439fab09254f55dabe96.png" />
+</div>
 </div>
 </section>
 </section>
@@ -694,7 +706,7 @@
 <p>where <span class="math notranslate nohighlight">\((u)_+ = \max(u, 0)\)</span>. Once the basis is built, fitting is ordinary least squares, exactly as in Lab 1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">spline_basis</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">knots</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">spline_basis</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">knots</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Cubic truncated power basis."""</span>
     <span class="n">powers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">x_values</span> <span class="o">**</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)])</span>
     <span class="n">truncated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">x_values</span> <span class="o">-</span> <span class="n">xi</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">knots</span><span class="p">])</span>
@@ -719,11 +731,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/1ac30d5b7a35b69e4abfde0d059290f2e96dc03240614bfc66dfe0e3cf272360.png" src="../_images/1ac30d5b7a35b69e4abfde0d059290f2e96dc03240614bfc66dfe0e3cf272360.png" />
+</div>
 </div>
 <p>Choosing the number and position of knots is awkward. The penalised alternative places a knot at every observation and controls smoothness with a single penalty on the wiggliness of the fit, which is far easier to tune.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">penalised_spline</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">n_knots</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">penalised_spline</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">n_knots</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Cubic spline with a ridge penalty on the truncated basis terms."""</span>
     <span class="n">knots</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_knots</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">B</span> <span class="o">=</span> <span class="n">spline_basis</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">knots</span><span class="p">)</span>
@@ -744,6 +759,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/3ef3cc1a89e701fbc275713f2e15bbadbc9cfe84ad223f638c9d1c8918407f4a.png" src="../_images/3ef3cc1a89e701fbc275713f2e15bbadbc9cfe84ad223f638c9d1c8918407f4a.png" />
+</div>
 </div>
 </section>
 <section id="part-4-linear-smoothers-and-effective-degrees-of-freedom">
@@ -755,7 +773,7 @@
 <p>For least squares with <span class="math notranslate nohighlight">\(p\)</span> regressors this equals <span class="math notranslate nohighlight">\(p\)</span> exactly. For everything else it is a real number that moves continuously with the tuning parameter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">smoother_matrix_spline</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">n_knots</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">smoother_matrix_spline</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">n_knots</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
     <span class="n">knots</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_knots</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">B</span> <span class="o">=</span> <span class="n">spline_basis</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">knots</span><span class="p">)</span>
     <span class="n">penalty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">knots</span><span class="p">))</span>
@@ -786,6 +804,22 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                     effective df
+smoother                                         
+Nadaraya-Watson, $h$ = 0.02                 18.89
+Nadaraya-Watson, $h$ = 0.05                  8.23
+Nadaraya-Watson, $h$ = 0.15                  3.14
+penalised spline, $\lambda$ = 1e-06          9.88
+penalised spline, $\lambda$ = 0.001          5.32
+penalised spline, $\lambda$ = 1              4.01
+penalised spline, $\lambda$ = 1000           4.00
+$k$-nearest neighbours, $k$ = 3             40.00
+$k$-nearest neighbours, $k$ = 10            12.00
+$k$-nearest neighbours, $k$ = 40             3.00
+</pre></div>
+</div>
+</div>
 </div>
 <section id="exercise-2">
 <h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
@@ -798,7 +832,7 @@
 <p>At matched complexity, does the choice of smoother matter much?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimize</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimize</span>
 
 <span class="n">target_df</span> <span class="o">=</span> <span class="mf">8.0</span>
 
@@ -832,6 +866,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/1e9c60af218d76aeaecfebd6ed1d98a28045b1f9fa504c0034fb38301ee8beca.png" src="../_images/1e9c60af218d76aeaecfebd6ed1d98a28045b1f9fa504c0034fb38301ee8beca.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                      MSE against truth
+smoother                               
+Nadaraya-Watson                 0.01765
+penalised spline                0.00782
+k-nearest neighbours            0.01899
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -844,7 +888,7 @@
 <p>where <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> collects kernel evaluations between training points and <span class="math notranslate nohighlight">\(\mathbf{k}(x_0)\)</span> between <span class="math notranslate nohighlight">\(x_0\)</span> and the training points. The Gaussian kernel corresponds to an infinite-dimensional basis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rbf_kernel</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">lengthscale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rbf_kernel</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">lengthscale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Squared exponential kernel matrix."""</span>
     <span class="n">sq</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">-</span> <span class="n">B</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:])</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="k">return</span> <span class="n">amplitude</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">sq</span> <span class="o">/</span> <span class="n">lengthscale</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
@@ -876,6 +920,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/82f19d7c3032eed493e6fedca6f8bc2c2f207a42c0130a68938ef156f3479e5f.png" src="../_images/82f19d7c3032eed493e6fedca6f8bc2c2f207a42c0130a68938ef156f3479e5f.png" />
+</div>
 </div>
 </section>
 <section id="part-6-gaussian-processes">
@@ -892,7 +939,7 @@
 <p>The mean is exactly kernel ridge regression. What the Gaussian process adds is the variance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gp_posterior</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">lengthscale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">sigma2</span><span class="o">=</span><span class="mf">0.09</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gp_posterior</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">lengthscale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">sigma2</span><span class="o">=</span><span class="mf">0.09</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Posterior mean and standard deviation of a zero-mean Gaussian process."""</span>
     <span class="n">K</span> <span class="o">=</span> <span class="n">rbf_kernel</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">lengthscale</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">)</span> <span class="o">+</span> <span class="n">sigma2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_data</span><span class="p">))</span>
     <span class="n">Ks</span> <span class="o">=</span> <span class="n">rbf_kernel</span><span class="p">(</span><span class="n">x_eval</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">lengthscale</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">)</span>
@@ -930,6 +977,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/cc4a4ed91c6e83607f8ae73b0859f8ba8d885d07c59f16ee31d34081ad595057.png" src="../_images/cc4a4ed91c6e83607f8ae73b0859f8ba8d885d07c59f16ee31d34081ad595057.png" />
+</div>
 </div>
 <section id="exercise-3">
 <h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Link to this heading">#</a></h3>
@@ -943,7 +993,7 @@
 </ol>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">neg_log_marginal</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">neg_log_marginal</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Negative log marginal likelihood; theta = log(lengthscale, amplitude, sigma)."""</span>
     <span class="n">ls</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
     <span class="n">K</span> <span class="o">=</span> <span class="n">rbf_kernel</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">ls</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span> <span class="o">+</span> <span class="n">sig</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_data</span><span class="p">))</span>
@@ -979,6 +1029,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lengthscale : 0.2772
+amplitude   : 0.8151
+noise sd    : 0.2953   (true value 0.3)
+</pre></div>
+</div>
+<img alt="../_images/04072ce7c086e5ed877fd2d1100d614cfb92f7b60732fbeb3c2b18d1db6ae31f.png" src="../_images/04072ce7c086e5ed877fd2d1100d614cfb92f7b60732fbeb3c2b18d1db6ae31f.png" />
+</div>
 </div>
 </section>
 </section>
@@ -988,7 +1046,7 @@
 <p>The response is annualised monthly CPI inflation; the predictor is the level of the unemployment rate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fredmd</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fredmd</span><span class="p">()</span>
 <span class="n">sample</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"1960-01"</span><span class="p">:</span><span class="s2">"2019-12"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"CPIAUCSL"</span><span class="p">,</span> <span class="s2">"UNRATE"</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 
 <span class="n">inflation</span> <span class="o">=</span> <span class="mi">1200</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">"CPIAUCSL"</span><span class="p">])</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
@@ -1019,6 +1077,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/09f94efdb062f3939126bbb066cfb1275d1cee80c7ea63e18954a87c2ae89a7f.png" src="../_images/09f94efdb062f3939126bbb066cfb1275d1cee80c7ea63e18954a87c2ae89a7f.png" />
+</div>
 </div>
 <section id="exercise-4">
 <h3>Exercise 4<a class="headerlink" href="#exercise-4" title="Link to this heading">#</a></h3>
@@ -1031,7 +1092,7 @@
 <p>Does allowing for nonlinearity improve forecasts of inflation, or only improve the fit?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_mask</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="s2">"1995-01-01"</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_mask</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="s2">"1995-01-01"</span>
 <span class="n">u_tr</span><span class="p">,</span> <span class="n">pi_tr</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">train_mask</span><span class="p">],</span> <span class="n">pi</span><span class="p">[</span><span class="n">train_mask</span><span class="p">]</span>
 <span class="n">u_te</span><span class="p">,</span> <span class="n">pi_te</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="o">~</span><span class="n">train_mask</span><span class="p">],</span> <span class="n">pi</span><span class="p">[</span><span class="o">~</span><span class="n">train_mask</span><span class="p">]</span>
 
@@ -1055,6 +1116,15 @@
                           <span class="n">e5</span><span class="o">.</span><span class="n">mse</span><span class="p">(</span><span class="n">pi_te</span><span class="p">,</span> <span class="n">pred_spline</span><span class="p">),</span>
                           <span class="n">e5</span><span class="o">.</span><span class="n">mse</span><span class="p">(</span><span class="n">pi_te</span><span class="p">,</span> <span class="n">pred_kernel</span><span class="p">)],</span>
 <span class="p">})</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"model"</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                       out-of-sample MSE
+model                                                   
+linear                                           16.3076
+penalised spline ($\lambda$ = 0.0203)            17.3811
+kernel ridge                                     16.4463
 </pre></div>
 </div>
 </div>
