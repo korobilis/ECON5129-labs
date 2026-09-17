@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -505,7 +505,7 @@
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
 
 <span class="n">REPO_RAW</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/korobilis/ECON5129-labs/main"</span>
@@ -538,7 +538,7 @@
 <p>The scaling by <span class="math notranslate nohighlight">\(\sqrt{d_k}\)</span> stops the dot products growing with dimension and pushing the softmax into saturation, where its gradients vanish.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Numerically stable softmax."""</span>
     <span class="n">shifted</span> <span class="o">=</span> <span class="n">scores</span> <span class="o">-</span> <span class="n">scores</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">exponentiated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">shifted</span><span class="p">)</span>
@@ -560,7 +560,7 @@
 <p>To see attention doing something meaningful we need embeddings with real structure. We rebuild the co-occurrence embeddings from Lab 9, then feed a short sequence of policy vocabulary through a single attention layer with random projections.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">meetings</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fomc_meetings</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meetings</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fomc_meetings</span><span class="p">()</span>
 <span class="n">tokens_by_meeting</span> <span class="o">=</span> <span class="p">[</span><span class="n">e5</span><span class="o">.</span><span class="n">tokenise</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">meetings</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]]</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
@@ -590,10 +590,15 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>embedding matrix: 400 words in 32 dimensions
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sequence</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"inflation"</span><span class="p">,</span> <span class="s2">"prices"</span><span class="p">,</span> <span class="s2">"unemployment"</span><span class="p">,</span> <span class="s2">"policy"</span><span class="p">,</span> <span class="s2">"rate"</span><span class="p">,</span> <span class="s2">"committee"</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sequence</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"inflation"</span><span class="p">,</span> <span class="s2">"prices"</span><span class="p">,</span> <span class="s2">"unemployment"</span><span class="p">,</span> <span class="s2">"policy"</span><span class="p">,</span> <span class="s2">"rate"</span><span class="p">,</span> <span class="s2">"committee"</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">index</span><span class="p">]</span>
 <span class="n">E</span> <span class="o">=</span> <span class="n">embeddings</span><span class="p">[[</span><span class="n">index</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">]]</span>
 
@@ -617,6 +622,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/6023e0c7d263617a369cf34df04835a712c19354fead0221a598dafe77644ddb.png" src="../_images/6023e0c7d263617a369cf34df04835a712c19354fead0221a598dafe77644ddb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>each row sums to one: True
+</pre></div>
+</div>
+</div>
 </div>
 <p>The projections here are random, so the pattern reflects the geometry of the embeddings rather than anything learned. In a trained model <span class="math notranslate nohighlight">\(\mathbf{W}_q\)</span>, <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span> and <span class="math notranslate nohighlight">\(\mathbf{W}_v\)</span> are estimated, and different heads specialise.</p>
 <section id="exercise-1">
@@ -630,7 +641,7 @@
 <p>What does attention become in the limit of very low temperature, and what in the limit of very high?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">attention_with_temperature</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">attention_with_temperature</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Scaled dot-product attention with an explicit softmax temperature."""</span>
     <span class="n">d_k</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">scores</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">@</span> <span class="n">K</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d_k</span><span class="p">)</span> <span class="o">*</span> <span class="n">temperature</span><span class="p">)</span>
@@ -653,6 +664,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/325ade2f2c84d30ac9c936c2c293e0487921dc5f1b41211e08b43f2b2fd5535e.png" src="../_images/325ade2f2c84d30ac9c936c2c293e0487921dc5f1b41211e08b43f2b2fd5535e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>maximum possible entropy for 6 tokens: 1.79
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -661,7 +678,7 @@
 <p>One attention head produces one weighted average. Multiple heads run in parallel with separate projections, and their outputs are concatenated, so different heads can capture different relations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">multi_head_attention</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">d_head</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">multi_head_attention</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">n_heads</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">d_head</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Concatenated output of several independently projected attention heads."""</span>
     <span class="n">generator</span> <span class="o">=</span> <span class="n">generator</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">outputs</span><span class="p">,</span> <span class="n">all_weights</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
@@ -691,6 +708,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/37bd7cc370b24bcb670c4bb60eab04d7c35aa6cd0d91c1ade85d12a31dc976bb.png" src="../_images/37bd7cc370b24bcb670c4bb60eab04d7c35aa6cd0d91c1ade85d12a31dc976bb.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>output dimension after concatenation: (6, 32)
+</pre></div>
+</div>
+</div>
 </div>
 <section id="position">
 <h3>Position<a class="headerlink" href="#position" title="Link to this heading">#</a></h3>
@@ -699,7 +722,7 @@
 \[ PE_{(t, 2i)} = \sin\left(\frac{t}{10000^{2i/d}}\right), \qquad PE_{(t, 2i+1)} = \cos\left(\frac{t}{10000^{2i/d}}\right). \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">positional_encoding</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">d_model</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">positional_encoding</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">d_model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Sinusoidal positional encodings."""</span>
     <span class="n">position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">length</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
     <span class="n">dimension</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">d_model</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
@@ -728,6 +751,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/2b2a3e908be14c8e89375381a700dd25f1881121df062a693b97a7c756013e0a.png" src="../_images/2b2a3e908be14c8e89375381a700dd25f1881121df062a693b97a7c756013e0a.png" />
+</div>
 </div>
 </section>
 <section id="exercise-2">
@@ -741,7 +767,7 @@
 </ol>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="n">out_original</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">attention</span><span class="p">(</span><span class="n">E</span> <span class="o">@</span> <span class="n">W_q</span><span class="p">,</span> <span class="n">E</span> <span class="o">@</span> <span class="n">W_k</span><span class="p">,</span> <span class="n">E</span> <span class="o">@</span> <span class="n">W_v</span><span class="p">)</span>
 <span class="n">out_reversed</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">attention</span><span class="p">(</span><span class="n">E</span><span class="p">[</span><span class="n">order</span><span class="p">]</span> <span class="o">@</span> <span class="n">W_q</span><span class="p">,</span> <span class="n">E</span><span class="p">[</span><span class="n">order</span><span class="p">]</span> <span class="o">@</span> <span class="n">W_k</span><span class="p">,</span> <span class="n">E</span><span class="p">[</span><span class="n">order</span><span class="p">]</span> <span class="o">@</span> <span class="n">W_v</span><span class="p">)</span>
@@ -760,6 +786,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Without positional encoding
+  maximum difference: 1.11e-16
+With positional encoding
+  maximum difference: 0.2516
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -769,7 +803,7 @@
 <p>This section needs the <code class="docutils literal notranslate"><span class="pre">transformers</span></code> library and downloads a few hundred megabytes. Set <code class="docutils literal notranslate"><span class="pre">RUN_TRANSFORMERS</span> <span class="pre">=</span> <span class="pre">True</span></code> in the setup cell to run it, ideally in Colab.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sample_sentences</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_sentences</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">"Inflation pressures have intensified and the committee should act to restrain demand."</span><span class="p">,</span>
     <span class="s2">"Labour market conditions remain weak and further accommodation appears warranted."</span><span class="p">,</span>
     <span class="s2">"The outlook is broadly balanced with risks in both directions."</span><span class="p">,</span>
@@ -797,11 +831,20 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                       sentence   label  score
+Inflation pressures have intensified and the committee shoul... not run    NaN
+Labour market conditions remain weak and further accommodati... not run    NaN
+The outlook is broadly balanced with risks in both direction... not run    NaN
+Credit conditions have deteriorated sharply and financial st... not run    NaN
+</pre></div>
+</div>
+</div>
 </div>
 <p>Compare against the dictionary from Lab 9, which requires no model, no download and no GPU.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dictionary_scores</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dictionary_scores</span> <span class="o">=</span> <span class="p">[</span>
     <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">e5</span><span class="o">.</span><span class="n">tokenise</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">e5</span><span class="o">.</span><span class="n">TONE_DICTIONARY</span><span class="p">[</span><span class="s2">"hawkish"</span><span class="p">])</span>
     <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">e5</span><span class="o">.</span><span class="n">tokenise</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">e5</span><span class="o">.</span><span class="n">TONE_DICTIONARY</span><span class="p">[</span><span class="s2">"dovish"</span><span class="p">])</span>
     <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sample_sentences</span>
@@ -814,6 +857,15 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                       sentence  dictionary, hawkish minus dovish
+Inflation pressures have intensified and the committee shoul...                                 2
+Labour market conditions remain weak and further accommodati...                                -1
+The outlook is broadly balanced with risks in both direction...                                 0
+Credit conditions have deteriorated sharply and financial st...                                 0
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="part-4-does-text-improve-a-macroeconomic-forecast">
@@ -822,7 +874,7 @@
 <p>We build monthly features from the corpus, align them to macroeconomic data, and ask whether adding them to an autoregression improves forecasts of the change in the unemployment rate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tone</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tone</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
     <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">e5</span><span class="o">.</span><span class="n">TONE_DICTIONARY</span><span class="p">[</span><span class="s2">"hawkish"</span><span class="p">])</span>
      <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">e5</span><span class="o">.</span><span class="n">TONE_DICTIONARY</span><span class="p">[</span><span class="s2">"dovish"</span><span class="p">]))</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">tokens_by_meeting</span>
@@ -843,11 +895,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9 text features for 268 meetings
+</pre></div>
+</div>
+</div>
 </div>
 <p>Meetings are irregular and macroeconomic data is monthly, so the text features are carried forward from the most recent meeting. This is a real-time alignment: at the end of month <span class="math notranslate nohighlight">\(t\)</span> only meetings that have already happened are used.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fredmd</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fredmd</span><span class="p">()</span>
 <span class="n">transformed</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">fredmd_transform</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span><span class="p">)</span>
 
 <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s2">"1977-01"</span><span class="p">,</span> <span class="s2">"2008-12"</span>
@@ -872,10 +929,15 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>380 months, training to 1999-06, evaluating from 1999-07
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">RidgeCV</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">RidgeCV</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeSeriesSplit</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
@@ -906,6 +968,18 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            RMSE  out-of-sample $R^2$ against AR
+specification                                                   
+autoregression only       0.1358                          0.0000
+text only                 0.1486                         -0.1986
+autoregression plus text  0.1456                         -0.1508
+
+Diebold-Mariano, with text against without: statistic 2.674, p-value 0.009
+A negative statistic favours the specification that includes text.
+</pre></div>
+</div>
+</div>
 </div>
 <section id="exercise-3">
 <h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Link to this heading">#</a></h3>
@@ -918,7 +992,7 @@
 <p>Where, if anywhere, does the text help? Be sceptical of any single cell in that table.</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">horizon_experiment</span><span class="p">(</span><span class="n">target_name</span><span class="p">,</span> <span class="n">horizon</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">horizon_experiment</span><span class="p">(</span><span class="n">target_name</span><span class="p">,</span> <span class="n">horizon</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Out-of-sample R-squared of the text-augmented model at a given horizon."""</span>
     <span class="n">series</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">[</span><span class="n">target_name</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
     <span class="n">led</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">horizon</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
@@ -949,6 +1023,15 @@
     <span class="n">results</span><span class="p">[</span><span class="n">target_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">horizon_experiment</span><span class="p">(</span><span class="n">target_name</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">]]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">"h = </span><span class="si">{</span><span class="n">h</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        UNRATE  FEDFUNDS
+h = 1  -0.1508    0.0338
+h = 3  -0.2011   -0.1610
+h = 6  -0.2000   -0.1446
+h = 12 -0.1952   -0.1128
 </pre></div>
 </div>
 </div>

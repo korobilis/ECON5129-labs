@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -505,7 +505,7 @@
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
 
 <span class="n">REPO_RAW</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/korobilis/ECON5129-labs/main"</span>
@@ -531,7 +531,7 @@
 <p>Every statistical method in this course takes a matrix. Text is not a matrix, so the first decision in any text project is how to make one, and every choice made along the way destroys information deliberately.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">meetings</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fomc_meetings</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meetings</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fomc_meetings</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">meetings</span><span class="p">)</span><span class="si">}</span><span class="s2"> meetings from </span><span class="si">{</span><span class="n">meetings</span><span class="p">[</span><span class="s1">'date'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">%Y-%m</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">meetings</span><span class="p">[</span><span class="s1">'date'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">%Y-%m</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">meetings</span><span class="p">[[</span><span class="s2">"date"</span><span class="p">,</span> <span class="s2">"chair"</span><span class="p">,</span> <span class="s2">"n_speakers"</span><span class="p">,</span> <span class="s2">"n_words"</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
@@ -543,13 +543,34 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>268 meetings from 1977-01 to 2008-12
+        date     chair  n_speakers  n_words
+0 1977-01-18     Burns          27    32957
+1 1977-02-15     Burns          28    21924
+2 1977-03-15     Burns          26    19002
+3 1977-04-19  Coldwell          28    23241
+4 1977-05-17     Burns          26    19029
+</pre></div>
+</div>
+<img alt="../_images/7a405da75b7893e40c63860c710ae34fc5c2e94c9c9914fd1f6e418377f98dfa.png" src="../_images/7a405da75b7893e40c63860c710ae34fc5c2e94c9c9914fd1f6e418377f98dfa.png" />
+</div>
 </div>
 <p><strong>Tokenisation</strong> splits a document into words, lowercases them, and drops punctuation and very common words. <code class="docutils literal notranslate"><span class="pre">e5.tokenise</span></code> does exactly that, and it is worth reading its source: it is six lines and each one is a modelling assumption.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">example</span> <span class="o">=</span> <span class="n">meetings</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">100</span><span class="p">][:</span><span class="mi">400</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example</span> <span class="o">=</span> <span class="n">meetings</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">100</span><span class="p">][:</span><span class="mi">400</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Raw text:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">example</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Tokens:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">e5</span><span class="o">.</span><span class="n">tokenise</span><span class="p">(</span><span class="n">example</span><span class="p">)[:</span><span class="mi">25</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raw text:
+ I think that Governor Johnson is the titular, de facto, temporary chairman. I'd like to nominate Chairman Greenspan, of course, as Chairman of the FOMC to kick this meeting off. So, I move Chairman Greenspan as Chairman of the FOMC. I second that. It looks like it's all done, Mr. Chairman. Doesn't strike me as a democratic election! Would somebody like to move the Vice Chairman? Yes, I also move P 
+
+Tokens:
+ ['governor', 'johnson', 'titular', 'facto', 'temporary', 'chairman', 'nominate', 'chairman', 'greenspan', 'course', 'chairman', 'fomc', 'kick', 'meeting', 'move', 'chairman', 'greenspan', 'chairman', 'fomc', 'second', 'looks', 'done', 'chairman', 'doesn', 'strike']
 </pre></div>
 </div>
 </div>
@@ -557,7 +578,7 @@
 <p>Word frequencies in any natural corpus follow Zipf’s law: the <span class="math notranslate nohighlight">\(r\)</span>th most common word appears roughly proportionally to <span class="math notranslate nohighlight">\(1/r\)</span>. A handful of words carry most of the mass and a long tail appears once or twice.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
 
 <span class="n">all_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">meetings</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">e5</span><span class="o">.</span><span class="n">tokenise</span><span class="p">(</span><span class="n">doc</span><span class="p">)]</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">all_tokens</span><span class="p">)</span>
@@ -581,6 +602,13 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/29b5b968aec59554d9a3ccac6430a30e16128f09ff164cfba5a95626ff6ba89c.png" src="../_images/29b5b968aec59554d9a3ccac6430a30e16128f09ff164cfba5a95626ff6ba89c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>vocabulary size: 28,323
+words appearing once: 7,636
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="part-2-weighting-and-similarity">
@@ -591,7 +619,7 @@
 <p>where <span class="math notranslate nohighlight">\(\text{tf}_{dv}\)</span> is the count of term <span class="math notranslate nohighlight">\(v\)</span> in document <span class="math notranslate nohighlight">\(d\)</span>, <span class="math notranslate nohighlight">\(D\)</span> the number of documents, and <span class="math notranslate nohighlight">\(d_v\)</span> the number of documents containing <span class="math notranslate nohighlight">\(v\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span><span class="p">,</span> <span class="n">TfidfVectorizer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span><span class="p">,</span> <span class="n">TfidfVectorizer</span>
 
 <span class="n">count_vec</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">e5</span><span class="o">.</span><span class="n">tokenise</span><span class="p">,</span> <span class="n">lowercase</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                             <span class="n">min_df</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">token_pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -603,10 +631,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>document-term matrix: 268 documents by 13448 terms
+density: 21.5%
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span> <span class="o">=</span> <span class="n">counts_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span> <span class="o">=</span> <span class="n">counts_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 <span class="n">document_frequency</span> <span class="o">=</span> <span class="p">(</span><span class="n">tf</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">idf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">meetings</span><span class="p">)</span> <span class="o">/</span> <span class="n">document_frequency</span><span class="p">)</span>
 <span class="n">tfidf_manual</span> <span class="o">=</span> <span class="n">tf</span> <span class="o">*</span> <span class="n">idf</span>
@@ -622,6 +656,15 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Terms with the highest inverse document frequency, meaning the most distinctive:
+abstain, zurich, abcp, accede, academicians, abysmal, redeemed, beefed, behooves, upping, belgium, beast
+
+Terms with the lowest, meaning they appear nearly everywhere:
+years, know, expect, far, extent, meeting, fact, yet, place, staff, year, case
+</pre></div>
+</div>
+</div>
 </div>
 <section id="cosine-similarity">
 <h3>Cosine similarity<a class="headerlink" href="#cosine-similarity" title="Link to this heading">#</a></h3>
@@ -630,7 +673,7 @@
 \[ \cos\theta_{ij} = \frac{\mathbf{x}_i'\mathbf{x}_j}{\|\mathbf{x}_i\|\,\|\mathbf{x}_j\|}. \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">normalize</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">normalize</span>
 
 <span class="n">normalised</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">tfidf_manual</span><span class="p">)</span>
 <span class="n">similarity</span> <span class="o">=</span> <span class="n">normalised</span> <span class="o">@</span> <span class="n">normalised</span><span class="o">.</span><span class="n">T</span>
@@ -651,6 +694,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/950579329cfef5a093358e65cb4b043b07d8da001af4c8b15ee750e1b2a32c57.png" src="../_images/950579329cfef5a093358e65cb4b043b07d8da001af4c8b15ee750e1b2a32c57.png" />
+</div>
 </div>
 </section>
 <section id="exercise-1">
@@ -663,7 +709,7 @@
 </ol>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dates</span> <span class="o">=</span> <span class="n">meetings</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dates</span> <span class="o">=</span> <span class="n">meetings</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 <span class="n">years</span> <span class="o">=</span> <span class="n">meetings</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 
 <span class="n">distance_to_past</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">meetings</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
@@ -686,6 +732,15 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/e55d795c6a6e69c305e05105f70aeb8521dd16531ff042d7e59c42d13bac79e9.png" src="../_images/e55d795c6a6e69c305e05105f70aeb8521dd16531ff042d7e59c42d13bac79e9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Meetings least similar to their own past:
+  1993-11, chaired by Greenspan
+  2005-09, chaired by Greenspan
+  1994-12, chaired by Greenspan
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -697,7 +752,7 @@
 \[ \text{tone}_d = \frac{\#\{\text{hawkish words in } d\} - \#\{\text{dovish words in } d\}}{\#\{\text{words in } d\}}. \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">dictionary_score</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">positive_set</span><span class="p">,</span> <span class="n">negative_set</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">dictionary_score</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">positive_set</span><span class="p">,</span> <span class="n">negative_set</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Net share of words falling in two opposing dictionaries."""</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -728,13 +783,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/83f1d81447f29bbd73a3f37704d855cf5a73357d548d4d24f372c368ea71bdf5.png" src="../_images/83f1d81447f29bbd73a3f37704d855cf5a73357d548d4d24f372c368ea71bdf5.png" />
+</div>
 </div>
 <section id="validation">
 <h3>Validation<a class="headerlink" href="#validation" title="Link to this heading">#</a></h3>
 <p>An index that has never been checked against anything observable is an opinion with a number attached. The natural test is whether the hawkish index moves with the policy rate the committee actually set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fredmd</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">e5</span><span class="o">.</span><span class="n">load_fredmd</span><span class="p">()</span>
 <span class="n">monthly</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s2">"FEDFUNDS"</span><span class="p">,</span> <span class="s2">"UNRATE"</span><span class="p">,</span> <span class="s2">"CPIAUCSL"</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">monthly</span><span class="p">[</span><span class="s2">"inflation"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1200</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">monthly</span><span class="p">[</span><span class="s2">"CPIAUCSL"</span><span class="p">])</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
 
@@ -751,6 +809,17 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              tone  sentiment
+tone         1.000      0.273
+sentiment    0.273      1.000
+FEDFUNDS    -0.136     -0.091
+inflation   -0.081     -0.084
+UNRATE      -0.417      0.148
+rate_change  0.190      0.153
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="exercise-2">
@@ -764,7 +833,7 @@
 <p>How much of the index is driven by a handful of common words?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hawkish</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">e5</span><span class="o">.</span><span class="n">TONE_DICTIONARY</span><span class="p">[</span><span class="s2">"hawkish"</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hawkish</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">e5</span><span class="o">.</span><span class="n">TONE_DICTIONARY</span><span class="p">[</span><span class="s2">"hawkish"</span><span class="p">])</span>
 <span class="n">dovish_trimmed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">e5</span><span class="o">.</span><span class="n">TONE_DICTIONARY</span><span class="p">[</span><span class="s2">"dovish"</span><span class="p">])</span> <span class="o">-</span> <span class="p">{</span><span class="s2">"unemployment"</span><span class="p">}</span>
 
 <span class="n">tone_trimmed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dictionary_score</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">hawkish</span><span class="p">,</span> <span class="n">dovish_trimmed</span><span class="p">)</span>
@@ -793,6 +862,15 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/150f6155b985e91a87621effc613c5bcc1b9649601ee86907bf04594b77dcd0b.png" src="../_images/150f6155b985e91a87621effc613c5bcc1b9649601ee86907bf04594b77dcd0b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          full  trimmed  top ten
+full     1.000    0.995    0.995
+trimmed  0.995    1.000    0.990
+top ten  0.995    0.990    1.000
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -805,7 +883,7 @@
 <p>and take a truncated singular value decomposition. The rows of the result are word vectors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cooccurrence_matrix</span><span class="p">(</span><span class="n">token_lists</span><span class="p">,</span> <span class="n">vocabulary</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cooccurrence_matrix</span><span class="p">(</span><span class="n">token_lists</span><span class="p">,</span> <span class="n">vocabulary</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Symmetric co-occurrence counts within a fixed word window."""</span>
     <span class="n">index</span> <span class="o">=</span> <span class="p">{</span><span class="n">w</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vocabulary</span><span class="p">)}</span>
     <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">vocabulary</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocabulary</span><span class="p">)))</span>
@@ -852,6 +930,13 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>inflation     : core, expectations, price, measures, near, underlying, upward, cpi
+unemployment  : output, trend, growth, higher, potential, average, low, employment
+credit        : liquidity, financial, debt, mortgage, banks, large, including, commercial
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="part-5-topic-models-and-measurement">
@@ -859,7 +944,7 @@
 <p>A topic model represents each document as a mixture over topics and each topic as a distribution over words. Latent semantic analysis does this with a singular value decomposition; latent Dirichlet allocation does it with an explicit probability model, which gives non-negative and more interpretable components.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">LatentDirichletAllocation</span><span class="p">,</span> <span class="n">TruncatedSVD</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">LatentDirichletAllocation</span><span class="p">,</span> <span class="n">TruncatedSVD</span>
 
 <span class="n">n_topics</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="n">lda</span> <span class="o">=</span> <span class="n">LatentDirichletAllocation</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_topics</span><span class="p">,</span> <span class="n">learning_method</span><span class="o">=</span><span class="s2">"batch"</span><span class="p">,</span>
@@ -872,10 +957,20 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>topic 0: inflation, rate, market, prices, markets, financial, percent, growth, policy, thank
+topic 1: don, rate, percent, year, economy, see, time, growth, say, rates
+topic 2: percent, don, rate, rates, growth, range, year, say, interest, money
+topic 3: inflation, growth, percent, rate, economy, year, last, rates, district, see
+topic 4: committee, policy, time, chairman, don, inflation, make, way, say, meeting
+topic 5: growth, year, rate, inflation, policy, market, percent, prices, forecast, economy
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">shares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">document_topics</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">"topic </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_topics</span><span class="p">)])</span>
 <span class="n">shares</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">meetings</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 <span class="n">smoothed</span> <span class="o">=</span> <span class="n">shares</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"date"</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -887,6 +982,9 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c9d9572228eb283a0f2b0643863b38a834ea7d89ad1fb0e241d13176d97412de.png" src="../_images/c9d9572228eb283a0f2b0643863b38a834ea7d89ad1fb0e241d13176d97412de.png" />
 </div>
 </div>
 <section id="exercise-3">
@@ -900,7 +998,7 @@
 <p>Remember that a correlation between a topic share and a macroeconomic variable is a measurement claim, not a causal one.</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">topic_frame</span> <span class="o">=</span> <span class="n">shares</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topic_frame</span> <span class="o">=</span> <span class="n">shares</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge_asof</span><span class="p">(</span>
     <span class="n">topic_frame</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"date"</span><span class="p">),</span>
     <span class="n">monthly</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"date"</span><span class="p">:</span> <span class="s2">"month"</span><span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"month"</span><span class="p">),</span>
@@ -927,6 +1025,18 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         inflation  UNRATE  FEDFUNDS
+topic 0     -0.201  -0.270    -0.298
+topic 1     -0.075   0.212     0.121
+topic 2      0.528   0.641     0.755
+topic 3     -0.218  -0.279    -0.202
+topic 4      0.063  -0.031    -0.192
+topic 5     -0.282  -0.533    -0.548
+</pre></div>
+</div>
+<img alt="../_images/bb3ac2859838745306d85200e578c1bdc1da3f90416ac124d2e04515f9e5daca.png" src="../_images/bb3ac2859838745306d85200e578c1bdc1da3f90416ac124d2e04515f9e5daca.png" />
+</div>
 </div>
 </section>
 <section id="exercise-4">
@@ -940,7 +1050,7 @@
 <p>Which is easier to interpret, and what is the source of the difference?</p>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">svd</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">svd</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">lsa_scores</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tfidf_manual</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">component</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">svd</span><span class="o">.</span><span class="n">components_</span><span class="p">):</span>
@@ -949,6 +1059,18 @@
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"component </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: +(</span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">positive</span><span class="p">)</span><span class="si">}</span><span class="s2">)  -(</span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">negative</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">variance explained by six components: </span><span class="si">{</span><span class="n">svd</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>component 0: +(panel, gdp, core, subprime, exhibit, pce, laughter, lacker)  -(work, yet, yes, years, year)
+component 1: +(edited, transcripts, lightly, deliberative, transcript, tapes, foia, tape)  -(subprime, panel, exhibit, core, rating)
+component 2: +(subprime, edited, transcripts, rating, exhibit, plosser, lacker, cdos)  -(gnp, ranges, steve, velocity, unintelligible)
+component 3: +(katrina, panel, gdp, asian, hurricane, asia, productivity, euro)  -(subprime, rating, gnp, plosser, cdos)
+component 4: +(katrina, hurricane, gasoline, rebuilding, orleans, gulf, accommodation, gallon)  -(panel, gdp, asian, asia, euro)
+component 5: +(subprime, narrative, numerical, vincent, section, vince, predominant, diversity)  -(pdcf, lehman, tslf, stigma, facility)
+
+variance explained by six components: 28.4%
 </pre></div>
 </div>
 </div>
